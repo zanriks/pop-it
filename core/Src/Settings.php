@@ -2,6 +2,8 @@
 
 namespace Src;
 
+use Error;
+
 class Settings
 {
     private array $_settings;
@@ -23,7 +25,7 @@ class Settings
         return $this->path['root'] ? '/' . $this->path['root'] : '';
     }
 
-    public function getViewsPath(): string
+    public function getViewsPath(): string // возвращает путь до шаблонов представления
     {
         return '/' . $this->path['views'] ?? '';
     }
