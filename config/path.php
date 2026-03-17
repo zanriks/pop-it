@@ -1,10 +1,6 @@
 <?php
 return [
-    'root' => 'fxaikis-m4',
-    'classes' => [
-        'app',
-        'core'
-    ],
+    'root' => '',
     'routes' => 'routes',
     'views' => 'views'
 ];
