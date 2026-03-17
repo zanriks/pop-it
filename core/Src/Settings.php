@@ -20,12 +20,13 @@ class Settings
         }
         throw new Error('Accessing a non-existent property');
     }
+
     public function getRootPath(): string
     {
         return $this->path['root'] ? '/' . $this->path['root'] : '';
     }
 
-    public function getViewsPath(): string // возвращает путь до шаблонов представления
+    public function getViewsPath(): string
     {
         return '/' . $this->path['views'] ?? '';
     }
