@@ -1,0 +1,12 @@
+.profile-info a {
+    color: black;
+}
+
+.profile-info a:last-child {
+    color: red;
+}
+
+.profile-info a:last-child:hover {
+    color: #e30b0b;
+}
+

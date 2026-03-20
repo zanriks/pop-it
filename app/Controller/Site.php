@@ -36,11 +36,11 @@ class Site
         if (Auth::attempt($request->all())) {
             app()->route->redirect('/hello');
         }
-        return new View('site.login', ['message' => 'Wrong username or password']);
+        return new View('site.login', ['message' => 'Неправильный логин или пароль']);
     }
-    public function logout(Request $request): string
+    public function logout(Request $request): void
     {
         Auth::logout();
-        app()->route->redirect('/hello');
+        app()->route->redirect('/');
     }
 }
