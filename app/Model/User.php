@@ -12,23 +12,29 @@ class User extends Model implements IdentityInterface
 
     public $timestamps = false;
     protected $fillable = [
+        'surname',
         'name',
+        'patronymic',
+        'phone',
+        'email',
         'login',
-        'password'
+        'password',
+        'role'
     ];
 
     protected static function booted()
     {
-        static::created(function ($user) {
-            $user->password = md5($user->password);
-            $user->save();
+        static::creating(function ($user) {
+            if (isset($user->password)) {
+                $user->password = md5($user->password);
+            }
         });
     }
 
     //Выборка пользователя по первичному ключу
     public function findIdentity(int $id)
     {
-        return self::where('id', $id)->first();
+        return self::find($id);
     }
 
     //Возврат первичного ключа
@@ -42,5 +48,9 @@ class User extends Model implements IdentityInterface
     {
         return self::where(['login' => $credentials['login'],
             'password' => md5($credentials['password'])])->first();
+    }
+    public function isAdmin()
+    {
+        return $this->role === 'admin';
     }
 }
