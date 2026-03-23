@@ -45,4 +45,13 @@ class Auth
         $user = self::user();
         return $user && $user->isAdmin();
     }
+    public static function generateCSRF(): string
+    {
+        if (Session::get('csrf_token')) {
+            return Session::get('csrf_token');
+        }
+        $token = md5(time());
+        Session::set('csrf_token', $token);
+        return $token;
+    }
 }

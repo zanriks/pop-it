@@ -12,8 +12,8 @@
     <section>
         <div>
             <div class="admin-links">
-                <a href="<?= app()->route->getUrl('all_users') ?>">Посмотреть таблицу со всеми пользователями</a>
-                <a href="<?= app()->route->getUrl('admin_signup') ?>">Добавить нового пользователя</a>
+                <a href="<?= app()->route->getUrl('/all_users') ?>">Посмотреть таблицу со всеми пользователями</a>
+                <a href="<?= app()->route->getUrl('/admin_signup') ?>">Добавить нового пользователя</a>
             </div>
         </div>
     </section>

@@ -2,6 +2,7 @@
 
 namespace Controller;
 
+use Couchbase\Role;
 use Model\User;
 use Src\Request;
 use Src\View;
