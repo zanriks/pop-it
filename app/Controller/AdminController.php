@@ -9,7 +9,7 @@ use Src\View;
 
 class AdminController
 {
-    public function admin_signup(Request $request): string
+    public function admin_signup_user(Request $request): string
     {
         if ($request->method === 'POST' && User::create($request->all())) {
             app()->route->redirect('/hello');

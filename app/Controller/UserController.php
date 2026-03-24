@@ -5,7 +5,7 @@ use Model\User;
 use Src\Request;
 use Src\View;
 
-class UserController
+class UserController // здесь пишутся методы CRUD
 {
     public function profile(): string
     {
