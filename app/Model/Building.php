@@ -12,9 +12,9 @@ class Building extends Model
     public $timestamps = false;
 
     protected $fillable = [
-        'building_id',
-        'building_name',
+        'buildingName',
         'address',
-        'phone'
+        'phone',
+        'floors'
     ];
 }

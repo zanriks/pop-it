@@ -5,7 +5,7 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="../../public/css/signup.css">
+    <link rel="stylesheet" href="../../public/css/main.css">
     <title>Document</title>
     <style>
         .table-container {
@@ -18,7 +18,7 @@
 
         .table-header, .table-row {
             display: grid;
-            grid-template-columns: 60px repeat(7, 1.2fr);
+            grid-template-columns: 60px 1.5fr 2fr 1.2fr 1.5fr;
             align-items: center;
             padding: 12px 20px;
         }
@@ -41,31 +41,30 @@
 <div class="table-container">
     <div class="table-header">
         <div>ID</div>
-        <div>Фамилия</div>
-        <div>Имя</div>
-        <div>Отчество</div>
+        <div>Название</div>
+        <div>Адрес</div>
         <div>Телефон</div>
-        <div>Email</div>
-        <div>Логин</div>
-        <div>Роль</div>
+        <div>Действия</div>
     </div>
 
-    <?php if (!empty($users)): ?>
-        <?php foreach ($users as $user): ?>
+    <?php if (!empty($buildings)): ?>
+        <?php foreach ($buildings as $building): ?>
             <div class="table-row">
-                <div><?= htmlspecialchars($user->id) ?></div>
-                <div><?= htmlspecialchars($user->surname) ?></div>
-                <div><?= htmlspecialchars($user->name) ?></div>
-                <div><?= htmlspecialchars($user->patronymic) ?></div>
-                <div><?= htmlspecialchars($user->phone) ?></div>
-                <div><?= htmlspecialchars($user->email) ?></div>
-                <div><?= htmlspecialchars($user->login) ?></div>
-                <div><?= htmlspecialchars($user->role) ?></div>
+                <div><?= $building->buildingId ?></div>
+                <div><?= $building->buildingName ?></div>
+                <div><?= $building->address ?></div>
+                <div><?= $building->phone ?></div>
+
+                <div class="actions">
+                    <a href="/building_edit?buildingId=<?= $building->buildingId ?>" style="color: #1c6d7a;">Редактировать</a>
+                    <a href="/delete_building?buildingId=<?= $building->buildingId ?>"
+                       onclick="return confirm('Удалить здание?')" style="color: red;">Удалить</a>
+                </div>
             </div>
         <?php endforeach; ?>
     <?php else: ?>
-        <div class="table-row" style="grid-template-columns: 1fr; text-align: center;">
-            <div>Пользователи не найдены</div>
+        <div class="table-row">
+            <div>Здания не найдены</div>
         </div>
     <?php endif; ?>
 </div>

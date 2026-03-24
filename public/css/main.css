@@ -2,14 +2,24 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
+    font-family: sans-serif;
 }
 
-header {background-color: #171212;}
+main {
+    width: 100%;
+    max-width: 1440px;
+    margin: 20px auto;
+}
+
+header { background-color: #171212;}
 
 nav {
+    max-width: 1440px;
+    width: 100%;
+    margin: 0 auto;
     display: flex;
     justify-content: space-between;
-    padding: 15px;
+    padding: 15px 0;
 }
 
 a {

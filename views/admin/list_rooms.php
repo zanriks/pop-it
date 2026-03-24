@@ -18,7 +18,7 @@
 
         .table-header, .table-row {
             display: grid;
-            grid-template-columns: 60px repeat(7, 1.2fr);
+            grid-template-columns: 60px 1.5fr 2fr repeat(4, 1.2fr);
             align-items: center;
             padding: 12px 20px;
         }
@@ -41,31 +41,34 @@
 <div class="table-container">
     <div class="table-header">
         <div>ID</div>
-        <div>Фамилия</div>
-        <div>Имя</div>
-        <div>Отчество</div>
-        <div>Телефон</div>
-        <div>Email</div>
-        <div>Логин</div>
-        <div>Роль</div>
+        <div>Здание</div>
+        <div>№</div>
+        <div>Этаж</div>
+        <div>Тип</div>
+        <div>Мест</div>
+        <div>Действия</div>
     </div>
 
-    <?php if (!empty($users)): ?>
-        <?php foreach ($users as $user): ?>
+    <?php if (!empty($rooms)): ?>
+        <?php foreach ($rooms as $room): ?>
             <div class="table-row">
-                <div><?= htmlspecialchars($user->id) ?></div>
-                <div><?= htmlspecialchars($user->surname) ?></div>
-                <div><?= htmlspecialchars($user->name) ?></div>
-                <div><?= htmlspecialchars($user->patronymic) ?></div>
-                <div><?= htmlspecialchars($user->phone) ?></div>
-                <div><?= htmlspecialchars($user->email) ?></div>
-                <div><?= htmlspecialchars($user->login) ?></div>
-                <div><?= htmlspecialchars($user->role) ?></div>
+                <div><?= $room->buildingId ?></div>
+                <div><?= $room->buildingName ?? 'ID: '.$room->buildingId ?></div>
+                <div><?= $room->roomNumber ?></div>
+                <div><?= $room->floor ?></div>
+                <div><?= $room->roomType ?></div>
+                <div><?= $room->numberOfTenants ?> / <?= $room->totalBeds ?></div>
+
+                <div class="actions">
+                    <a href="/delete_room?room_id=<?= $room->buildingId ?>"
+                       onclick="return confirm('Удалить комнату?')"
+                       style="color: red;">Удалить</a>
+                </div>
             </div>
         <?php endforeach; ?>
     <?php else: ?>
-        <div class="table-row" style="grid-template-columns: 1fr; text-align: center;">
-            <div>Пользователи не найдены</div>
+        <div class="table-row">
+            <div>Комнаты не найдены</div>
         </div>
     <?php endif; ?>
 </div>

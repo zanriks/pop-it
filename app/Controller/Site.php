@@ -26,12 +26,13 @@ class Site
     {
         if ($request->method === 'POST') {
             $validator = new Validator($request->all(), [
-                'name' => ['required'],
-                'login' => ['required', 'unique:users,login'],
-                'password' => ['required'],
+                'name' => ['required', 'min:5'],
+                'login' => ['required', 'unique:users,login', 'min:6'],
+                'password' => ['required', 'min:8'],
             ], [
                 'required' => 'Поле :field пусто',
-                'unique' => 'Поле :field должно быть уникально'
+                'unique' => 'Поле :field должно быть уникально',
+                'min' => 'Поле :field должно содержать минимум :min символов'
             ]);
             if ($validator->fails()) {
                 return new View('site.signup', ['message' => json_encode($validator->errors(), JSON_UNESCAPED_UNICODE)]);

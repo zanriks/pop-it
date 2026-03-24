@@ -14,13 +14,13 @@
         <h2>Регистрация нового пользователя</h2>
         <h3><?= $message ?? ''; ?></h3>
         <form method="post">
-            <label>Фамилия <input type="text" name="surname" placeholder="your surname"></label>
-            <label>Имя <input type="text" name="name" placeholder="name"></label>
-            <label>Отчество <input type="text" name="patronymic" placeholder="patronymic"></label>
-            <label>Номер телефона<input type="tel" name="phone" placeholder="phone"></label>
+            <label>Фамилия <input type="text" name="surname" placeholder="Ваша фамилия"></label>
+            <label>Имя <input type="text" name="name" placeholder="Имя"></label>
+            <label>Отчество <input type="text" name="patronymic" placeholder="Отчество (при наличии)"></label>
+            <label>Номер телефона<input type="tel" name="phone" placeholder="Номер телефона"></label>
             <label>Почта<input type="email" name="email" placeholder="email@mail.ru"></label>
-            <label>Логин<input type="text" name="login" placeholder="login"></label>
-            <label>Пароль<input type="password" name="password" placeholder="password"></label>
+            <label>Логин<input type="text" name="login" placeholder="Логин пользователя"></label>
+            <label>Пароль<input type="password" name="password" placeholder="Пароль"></label>
             <label for="role">Выберите роль:</label>
             <select name="role" id="role">
                 <option value="admin">Администратор</option>

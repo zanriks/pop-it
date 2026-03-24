@@ -14,6 +14,9 @@
             <div class="admin-links">
                 <a href="<?= app()->route->getUrl('/all_users') ?>">Посмотреть таблицу со всеми пользователями</a>
                 <a href="<?= app()->route->getUrl('/admin_signup') ?>">Добавить нового пользователя</a>
+                <a href="<?= app()->route->getUrl('/building_create') ?>">Добавить новое здание</a>
+                <a href="<?= app()->route->getUrl('/room_create') ?>">Добавить новую комнату</a>
+
             </div>
         </div>
     </section>
