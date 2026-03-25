@@ -36,8 +36,8 @@
             <input type="email" name="email" value="<?= $user->email ?>">
         </div>
         <div style="margin-top: 20px;">
-            <button type="submit" class="btn-save">Сохранить изменения</button>
-            <a href="/admin/admin_panel" class="btn-cancel">Отмена</a>
+            <button type="submit">Сохранить изменения</button>
+            <a href="/admin/admin_panel">Отмена</a>
         </div>
     </form>
 </body>

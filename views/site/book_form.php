@@ -13,6 +13,11 @@
         <form action="/room/booking" method="POST">
             <input name="csrf_token" type="hidden" value="<?= app()->auth::generateCSRF() ?>"/>
 
+
+
+            <label>Номер комнаты:</label>
+            <input type="name="checkInDate" required>
+
             <label>Дата заезда:</label>
             <input type="date" name="checkInDate" required>
 

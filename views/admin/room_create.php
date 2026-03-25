@@ -19,8 +19,8 @@
             <select name="buildingId" id="buildingId" required>
                 <option value="">Выберите здание</option>
                 <?php foreach ($buildings as $building): ?>
-                    <option value="<?= $building->id ?>">
-                        <?= $building->name ?> (<?= $building->address ?>)
+                    <option value="<?= $building->buildingId ?>">
+                        <?= $building->buildingName ?> (<?= $building->address ?>)
                     </option>
                 <?php endforeach; ?>
             </select>

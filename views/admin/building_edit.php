@@ -11,6 +11,7 @@
     <h1>Редактирование здания <?= $building->id ?></h1>
 
     <form action="/admin/building/update?id=<?= $building->id ?>" method="POST">
+        <input name="csrf_token" type="hidden" value="<?= app()->auth::generateCSRF() ?>"/>
         <input type="hidden" name="id" value="<?= $building->id ?>">
 
         <div class="form-group">

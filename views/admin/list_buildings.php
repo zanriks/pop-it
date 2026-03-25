@@ -18,7 +18,7 @@
 
         .table-header, .table-row {
             display: grid;
-            grid-template-columns: 60px 1.5fr 2fr 1.2fr 1.5fr;
+            grid-template-columns: 60px 1.5fr 2fr 1.2fr 1.5fr 1.5fr;
             align-items: center;
             padding: 12px 20px;
         }
@@ -54,6 +54,7 @@
                 <div><?= $building->buildingName ?></div>
                 <div><?= $building->address ?></div>
                 <div><?= $building->phone ?></div>
+                <div><?= $building->floors ?></div>
 
                 <div class="actions">
                     <a href="/admin/building/edit?buildingId=<?= $building->buildingId ?>" style="color: #1c6d7a;">Редактировать</a>

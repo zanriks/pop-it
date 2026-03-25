@@ -36,7 +36,7 @@ class RoomController
         return new View('admin.room_create', ['buildings' => $buildings]);
     }
     // Список всех комнат
-    public function list_rooms(Request $request): string
+    public function list_rooms(): string
     {
         $rooms = Room::all();
         return new View('admin.list_rooms', ['rooms' => $rooms]);
@@ -47,7 +47,7 @@ class RoomController
         $id = $request->get('roomId');
         Room::where('roomId', $id)->delete();
         app()->route->redirect('/admin/admin_panel');
-        return '';
+        return new View('admin.room_delete', ['roomId' => $id]);
     }
     public function room_edit(Request $request): string
     {
@@ -57,8 +57,8 @@ class RoomController
     }
     public function room_update(Request $request): string
     {
-        $id = $request->get('roomId');
-        $room = Room::where('roomId', $id)->first();
+        $id = $request->all()['roomId'];
+        $room = Room::where('buildingId', $id)->get();
         if ($room) {
             $room->update($request->all());
             app()->route->redirect('/admin/building/list');

@@ -40,11 +40,6 @@ class Auth
         Session::clear('id');
         return true;
     }
-    public static function isAdmin(): bool
-    {
-        $user = self::user();
-        return $user && $user->isAdmin();
-    }
     public static function generateCSRF(): string
     {
         if (Session::get('csrf_token')) {

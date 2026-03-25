@@ -12,7 +12,6 @@ class Room extends Model
     public $timestamps = false;
 
     protected $fillable = [
-        'roomId',
         'buildingId',
         'roomNumber',
         'floor',

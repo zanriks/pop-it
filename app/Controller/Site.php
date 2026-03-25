@@ -10,7 +10,7 @@ use Model\User;
 use Src\Auth\Auth;
 class Site
 {
-    public function index(Request $request): string
+    public function index(): string
     {
         return new View('site.post');
     }
@@ -46,7 +46,7 @@ class Site
         }
         return new View('site.login', ['message' => 'Неправильный логин или пароль']);
     }
-    public function logout(Request $request): void
+    public function logout(): void
     {
         Auth::logout();
         app()->route->redirect('/');

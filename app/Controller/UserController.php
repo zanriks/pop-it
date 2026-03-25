@@ -5,7 +5,7 @@ use Model\User;
 use Src\Request;
 use Src\View;
 
-class UserController // здесь пишутся методы CRUD
+class UserController
 {
     public function profile(): string
     {
@@ -13,18 +13,22 @@ class UserController // здесь пишутся методы CRUD
     }
     public function profile_edit(Request $request): string
     {
-        $id = $request->get('id');
+        $id = $_GET['id'] ?? null;
         $user = User::all()->find($id);
-        return new View('admin.profile_edit');
+        if (!$user) {
+            app()->route->redirect('/profile/user');
+        }
+        return new View('admin.profile_edit', ['user' => $user]);
     }
     public function profile_update(Request $request): string
     {
         $id = $request->get('id');
-        $user = User::where('id', $id)->first();
+        $data = $request->all();
+        $user = User::find($id);
         if ($user) {
-            $user->update($request->all());
+            $user->update($data);
             app()->route->redirect('/profile/user');
         }
-        return (new View())->render('admin.profile_edit');
+        return (new View())->render('admin.profile_edit', ['user' => $user]);
     }
 }

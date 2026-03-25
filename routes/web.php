@@ -28,3 +28,5 @@ Route::add(['GET', 'POST'], '/admin/room/edit', [Controller\RoomController::clas
 Route::add(['GET', 'POST'], '/admin/room/update', [Controller\RoomController::class, 'room_update'])->middleware('auth', 'admin');
 Route::add(['GET', 'POST'], '/admin/room/delete', [Controller\RoomController::class, 'delete_room'])->middleware('auth', 'admin');
 Route::add(['GET', 'POST'], '/room/booking', [Controller\RoomController::class, 'booking'])->middleware('auth');
+
+Route::add(['GET', 'POST'], '/room/register', [Controller\RegistrationController::class, 'register_create'])->middleware('auth');
