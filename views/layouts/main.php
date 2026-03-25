@@ -18,13 +18,13 @@
                 <a href="<?= app()->route->getUrl('/signup') ?>">Регистрация</a>
             </div>
             <?php else: ?>
-                <a href="<?= app()->route->getUrl('/profile_user') ?>">Профиль</a>
+                <a href="<?= app()->route->getUrl('/profile/user') ?>">Профиль</a>
                 <a href="<?= app()->route->getUrl('/logout') ?>">Выход</a>
             <?php
             endif;
             ?>
             <?php if(app()->auth::user()->role === 'admin'): ?>
-            <a href="<?= app()->route->getUrl('/admin_panel') ?>">Админ панель</a>
+            <a href="<?= app()->route->getUrl('/admin/admin_panel') ?>">Админ панель</a>
             <?php endif ?>
         </nav>
     </header>

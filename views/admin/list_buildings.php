@@ -6,7 +6,7 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="../../public/css/main.css">
-    <title>Document</title>
+    <title>Все здании</title>
     <style>
         .table-container {
             width: 100%;
@@ -56,8 +56,8 @@
                 <div><?= $building->phone ?></div>
 
                 <div class="actions">
-                    <a href="/building_edit?buildingId=<?= $building->buildingId ?>" style="color: #1c6d7a;">Редактировать</a>
-                    <a href="/delete_building?buildingId=<?= $building->buildingId ?>"
+                    <a href="/admin/building/edit?buildingId=<?= $building->buildingId ?>" style="color: #1c6d7a;">Редактировать</a>
+                    <a href="/admin/building/delete?buildingId=<?= $building->buildingId ?>"
                        onclick="return confirm('Удалить здание?')" style="color: red;">Удалить</a>
                 </div>
             </div>

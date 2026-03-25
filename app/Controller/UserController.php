@@ -23,7 +23,7 @@ class UserController // здесь пишутся методы CRUD
         $user = User::where('id', $id)->first();
         if ($user) {
             $user->update($request->all());
-            app()->route->redirect('/list_buildings');
+            app()->route->redirect('/profile/user');
         }
         return (new View())->render('admin.profile_edit');
     }

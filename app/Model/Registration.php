@@ -5,7 +5,7 @@ namespace Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Room extends Model
+class Registration extends Model
 {
     use HasFactory;
 
@@ -13,11 +13,12 @@ class Room extends Model
 
     protected $fillable = [
         'roomId',
-        'buildingId',
-        'roomNumber',
-        'floor',
-        'roomType',
-        'totalBeds',
-        'numberOfTenants'
+        'tenantId',
+        'checkInDate',
+        'checkOutDate',
+        'orderNumber',
+        'orderDate',
+        'status',
+        'paymentId'
     ];
 }

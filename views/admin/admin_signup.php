@@ -6,7 +6,7 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="../../public/css/signup.css">
-    <title>Document</title>
+    <title>Добавление нового пользователя</title>
 </head>
 <body>
 <div class="signup-form-center">
@@ -18,7 +18,7 @@
             <label>Имя <input type="text" name="name" placeholder="Имя"></label>
             <label>Отчество <input type="text" name="patronymic" placeholder="Отчество (при наличии)"></label>
             <label>Номер телефона<input type="tel" name="phone" placeholder="Номер телефона"></label>
-            <label>Почта<input type="email" name="email" placeholder="email@mail.ru"></label>
+            <label>Почта<input type="email" name="email" placeholder="example@mail.ru"></label>
             <label>Логин<input type="text" name="login" placeholder="Логин пользователя"></label>
             <label>Пароль<input type="password" name="password" placeholder="Пароль"></label>
             <label for="role">Выберите роль:</label>

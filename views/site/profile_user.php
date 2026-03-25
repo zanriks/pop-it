@@ -13,7 +13,7 @@
     <section class="profile-info">
         <h1>Профиль</h1>
         <p>Привет, <?= app()->auth::user()->name ?>!</p>
-        <a href="<?= app()->route->getUrl('/profile_edit') ?>">Редактировать профиль</a>
+        <a href="<?= app()->route->getUrl('/profile/edit') ?>">Редактировать профиль</a>
         <a href="<?= app()->route->getUrl('/logout') ?>">Выйти</a>
     </section>
 </main>

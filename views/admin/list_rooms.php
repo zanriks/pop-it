@@ -6,7 +6,7 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="../../public/css/signup.css">
-    <title>Document</title>
+    <title>Все комнаты</title>
     <style>
         .table-container {
             width: 100%;
@@ -18,7 +18,7 @@
 
         .table-header, .table-row {
             display: grid;
-            grid-template-columns: 60px 1.5fr 2fr repeat(4, 1.2fr);
+            grid-template-columns: 100px 2fr 1.4fr repeat(4, 1.5fr);
             align-items: center;
             padding: 12px 20px;
         }
@@ -40,8 +40,8 @@
 <body>
 <div class="table-container">
     <div class="table-header">
-        <div>ID</div>
-        <div>Здание</div>
+        <div>ID здания</div>
+        <div>Название здания</div>
         <div>№</div>
         <div>Этаж</div>
         <div>Тип</div>
@@ -60,7 +60,7 @@
                 <div><?= $room->numberOfTenants ?> / <?= $room->totalBeds ?></div>
 
                 <div class="actions">
-                    <a href="/delete_room?room_id=<?= $room->buildingId ?>"
+                    <a href="/admin/room/delete?room_id=<?= $room->buildingId ?>"
                        onclick="return confirm('Удалить комнату?')"
                        style="color: red;">Удалить</a>
                 </div>

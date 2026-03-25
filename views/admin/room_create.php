@@ -5,18 +5,18 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Админ панель</title>
+    <title>Создание новой комнаты</title>
     <link rel="stylesheet" href="../../public/css/admin_panel.css"
 </head>
 <body>
 <main>
     <h1>Добавить новую комнату</h1>
 
-    <form action="/room_create" method="post">
+    <form action="/admin/room/create" method="post">
         <input name="csrf_token" type="hidden" value="<?= app()->auth::generateCSRF() ?>"/>
         <div class="form-group">
             <label>Здание:</label>
-            <select name="buildingId" required>
+            <select name="buildingId" id="buildingId" required>
                 <option value="">Выберите здание</option>
                 <?php foreach ($buildings as $building): ?>
                     <option value="<?= $building->id ?>">
@@ -37,7 +37,7 @@
         <label>Всего спальных мест:<input type="number" name="totalBeds" min="1" value="2" required></label>
         <label>Текущее кол-во жильцов:<input type="number" name="numberOfTenants" min="0" value="0"></label>
         <button type="submit">Создать комнату</button>
-        <a href="/admin_panel">Отмена</a>
+        <a href="/admin/admin_panel">Отмена</a>
     </form>
 
 </main>
