@@ -53,7 +53,7 @@ class BuildingController
     public function building_update(Request $request): string
     {
         $id = $request->all()['buildingId'];
-        $building = Building::where('buildingId', $id)->get();
+        $building = Building::find($id);
         if ($building) {
             $building->update($request->all());
             app()->route->redirect('/admin/building/list');

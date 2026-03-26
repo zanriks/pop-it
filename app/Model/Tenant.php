@@ -5,20 +5,18 @@ namespace Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Room extends Model
+class Tenant extends Model
 {
     use HasFactory;
-
-    protected $primaryKey = 'roomId';
+    protected $primaryKey = 'tenantId';
     protected $keyType = 'int';
+
     public $timestamps = false;
 
     protected $fillable = [
-        'buildingId',
-        'roomNumber',
-        'floor',
-        'roomType',
-        'totalBeds',
-        'numberOfTenants'
+        'passportSeries',
+        'passportNumber',
+        'status',
+        'userId'
     ];
 }

@@ -58,23 +58,11 @@ class RoomController
     public function room_update(Request $request): string
     {
         $id = $request->all()['roomId'];
-        $room = Room::where('buildingId', $id)->get();
+        $room = Room::find($id);
         if ($room) {
             $room->update($request->all());
             app()->route->redirect('/admin/building/list');
         }
         return (new View())->render('admin.room_edit', ['room' => $room]);
-    }
-    public function booking(Request $request): string
-    {
-        $room = Room::where('roomId', $request->get('roomId'))->first();
-        $data['roomId'] = app()->auth->user()->id;
-        if($request->method === 'POST') {
-            if(Registration::create($data)) {
-                $room->increment('numberOfTenants');
-                app()->route->redirect('/profile/my_bookings');
-            }
-        }
-        return new View('site.book_form', ['room' => $room]);
     }
 }
