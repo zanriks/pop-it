@@ -16,11 +16,16 @@ class RegistrationController
     {
         $rooms = Room::whereColumn('numberOfTenants', '<', 'totalBeds')->get();
 
+        $currentUser = Auth::user();
+        $tenant = Tenant::where('userId', $currentUser->id)->first();
+        var_dump($tenant);
+
         if ($request->method === 'POST') {
             $data = $request->all();
 
             $currentUser = Auth::user();
-            $tenant = Tenant::where('userId', $currentUser->userId)->first();
+            $tenant = Tenant::where('userId', $currentUser->id)->first();
+            var_dump($tenant);
 
             if (!$tenant) {
                 return new View('registration.create', [
@@ -43,7 +48,7 @@ class RegistrationController
                 return new View('registration.create', ['errors' => $validator->errors(), 'rooms' => $rooms]);
             }
 
-            $room = Room::find($data['roomId']);
+            $room = Room::where('roomId', $data['roomId'])->first();
             if(!$room) {
                 return new View('registration.create', [
                     'errors' => ['roomId' => 'Комната не найдена'],
@@ -85,7 +90,7 @@ class RegistrationController
                 ]);
             }
         }
-        return new View('registration.create', ['rooms' => $rooms, 'errors' => [], 'registration' => $registration]);
+        return new View('registration.create', ['rooms' => $rooms, 'errors' => []]);
     }
     // метод для заселения
     public function checkIn(Request $request): string
@@ -93,10 +98,9 @@ class RegistrationController
         $id = $request->get('registrationId');
         $reg = Registration::find($id);
 
-        if ($reg && $reg->status === 'awaiting') {
+        if ($reg && $reg->status === 'awaiting' || $reg->status === 'paid') {
             $reg->update([
                 'status' => 'active',
-                'actualCheckinDate' => date('Y-m-d H:i:s')
             ]);
 
             $room = Room::find($reg->roomId);

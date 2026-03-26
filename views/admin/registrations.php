@@ -25,24 +25,23 @@
     <?php foreach ($registrations as $reg): ?>
         <tr>
             <td>
-                <?= htmlspecialchars($reg->orderNumber) ?><br>
-                <small><?= htmlspecialchars($reg->orderDate) ?></small>
+                <?= $reg->orderNumber ?><br>
+                <small><?= $reg->orderDate ?></small>
             </td>
             <td>
-                <?= htmlspecialchars($reg->tenant->user->surname ?? 'N/A') ?>
-                <?= htmlspecialchars($reg->tenant->user->name ?? '') ?>
+                <?= $reg->tenant->user->surname ?>
+                <?= $reg->tenant->user->name ?>
             </td>
             <td>
-                №<?= htmlspecialchars($reg->room->roomNumber ?? 'N/A') ?><br>
-                <small><?= htmlspecialchars($reg->room->building->buildingName ?? '') ?></small>
+                №<?= $reg->room->roomNumber ?><br>
+                <small><?= $reg->room->building->buildingName ?></small>
             </td>
             <td>
-                <?= htmlspecialchars($reg->checkInDate) ?><br>
-                <small>↓</small><br>
-                <?= htmlspecialchars($reg->checkOutDate) ?>
+                <?= $reg->checkInDate ?><br>
+                <?= $reg->checkOutDate ?>
             </td>
             <td>
-                    <span class="status-<?= $reg->status ?>">
+                    <span>
                         <?= match($reg->status) {
                             'awaiting' => 'Ожидает',
                             'confirmed' => 'Подтверждено',
@@ -54,30 +53,30 @@
                     </span>
             </td>
             <td>
-                <?= $reg->paymentID ? 'Оплачено' : 'Не оплачено' ?>
+                <?= $reg->paymentId ? 'Оплачено' : 'Не оплачено' ?>
             </td>
             <td>
                 <?php if ($reg->status === 'awaiting'): ?>
-                    <form method="POST" action="/admin/registration/confirm" style="display:inline;">
+                    <form method="POST" action="/admin/registration/confirm">
                         <input type="hidden" name="csrf_token" value="<?= app()->auth->generateCSRF() ?>">
-                        <input type="hidden" name="id" value="<?= $reg->registrationID ?>">
-                        <button type="submit" class="btn btn-confirm">Подтвердить</button>
+                        <input type="hidden" name="registrationId" value="<?= $reg->registrationId ?>">
+                        <button type="submit">Подтвердить</button>
                     </form>
                 <?php endif; ?>
 
                 <?php if ($reg->status === 'confirmed'): ?>
-                    <form method="POST" action="/admin/registration/checkin" style="display:inline;">
+                    <form method="POST" action="/admin/registration/checkin">
                         <input type="hidden" name="csrf_token" value="<?= app()->auth->generateCSRF() ?>">
-                        <input type="hidden" name="id" value="<?= $reg->registrationID ?>">
-                        <button type="submit" class="btn btn-checkin">Заселить</button>
+                        <input type="hidden" name="registrationId" value="<?= $reg->registrationId ?>">
+                        <button type="submit">Заселить</button>
                     </form>
                 <?php endif; ?>
 
                 <?php if ($reg->status === 'active'): ?>
-                    <form method="POST" action="/admin/registration/checkout" style="display:inline;">
+                    <form method="POST" action="/admin/registration/checkout">
                         <input type="hidden" name="csrf_token" value="<?= app()->auth->generateCSRF() ?>">
-                        <input type="hidden" name="id" value="<?= $reg->registrationID ?>">
-                        <button type="submit" class="btn btn-checkout" onclick="return confirm('Выселить жильца?')">Выселить</button>
+                        <input type="hidden" name="registrationId" value="<?= $reg->registrationId ?>">
+                        <button type="submit" onclick="return confirm('Выселить жильца?')">Выселить</button>
                     </form>
                 <?php endif; ?>
             </td>

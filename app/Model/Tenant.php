@@ -19,4 +19,8 @@ class Tenant extends Model
         'status',
         'userId'
     ];
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'userId', 'id');
+    }
 }

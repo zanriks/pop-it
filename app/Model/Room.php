@@ -21,4 +21,8 @@ class Room extends Model
         'totalBeds',
         'numberOfTenants'
     ];
+    public function building()
+    {
+        return $this->hasMany(Building::class, 'buildingId');
+    }
 }

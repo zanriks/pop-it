@@ -2,6 +2,7 @@
 
 namespace Controller;
 
+use Illuminate\Support\Str;
 use Model\Registration;
 use Model\User;
 use Src\Request;
@@ -47,6 +48,7 @@ class AdminController
     public function allRegistrations(): string
     {
         $registrations = Registration::with(['tenant.user', 'room.building'])->get();
+        var_dump($registrations);
         return new View('admin.registrations', ['registrations' => $registrations]);
     }
 }

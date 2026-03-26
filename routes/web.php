@@ -45,3 +45,5 @@ Route::add('GET', '/admin/debtor_report', [Controller\AdminController::class, 'd
 
 // Оплата
 Route::add(['GET', 'POST'], '/payment/pay', [Controller\PaymentController::class, 'payBooking'])->middleware('auth');
+
+Route::add(['GET', 'POST'], '/user/create/tenant', [Controller\TenantController::class, 'createTenant'])->middleware('auth');

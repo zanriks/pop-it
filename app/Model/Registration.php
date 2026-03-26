@@ -22,4 +22,12 @@ class Registration extends Model
         'status',
         'paymentId'
     ];
+    public function tenant()
+    {
+        return $this->hasMany(Tenant::class, 'tenantId', 'tenantId');
+    }
+    public function room()
+    {
+        return $this->hasMany(Room::class, 'roomId', 'roomId');
+    }
 }
