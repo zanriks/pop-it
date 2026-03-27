@@ -11,31 +11,52 @@ class PaymentController
 {
     public function payBooking(Request $request): string
     {
+        $registrationId = $request->get('id');
+
+        if (!$registrationId) {
+            app()->route->redirect('/profile/my_bookings');
+            return '';
+        }
+
+        $registration = Registration::find($registrationId);
+
+        if (!$registration) {
+            app()->route->redirect('/profile/my_bookings');
+            return '';
+        }
+
+        $payment = null;
+        if ($registration->paymentId){
+            $payment = Payment::find($registration->paymentId);
+        }
+
         if ($request->method === 'POST') {
             $data = $request->all();
 
-            $registration = Registration::find($data['registrationId']);
-            if ($registration && $registration->status === 'awaiting') {
-                $payment = Payment::create([
-                    'registration_id' => $registration->registrationId,
-                    'accrualAmount' => $data['amount'],
-                    'paidAmount' => $data['amount'],
-                    'paymentDate' => date('Y-m-d H:m:s'),
+            if ($registration && ($registration->status === 'awaiting' || $registration->status === 'unpaid')) {
+
+                $paymentData = [
+                    'accrualAmount' => $data['accrualAmount'],
+                    'paidAmount' => $data['paidAmount'],
+                    'paymentDate' => date('Y-m-d H:i:s'),
                     'paymentType' => $data['paymentType'],
                     'paymentStatus' => 'paid',
                     'paymentPeriod' => date('Y-m'),
-                ]);
+                ];
 
-                $registration->update([
-                    'paymentId' => $payment->paymentId,
-                    'status' => 'paid'
-                ]);
+                if ($payment) {
+                    $payment->update($paymentData);
+                } else {
+                    $payment = Payment::create($paymentData);
 
+                    $registration->update([
+                        'paymentId' => $payment->paymentId,
+                        'status' => 'paid'
+                    ]);
+                }
                 app()->route->redirect('/profile/my_bookings');
             }
         }
-
-        $registration = Registration::find($request->get('registrationId'));
         return new View('payment.pay', ['registration' => $registration, 'payment' => $payment]);
     }
 }

@@ -5,35 +5,11 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="../../public/css/signup.css">
+    <link rel="stylesheet" href="../../public/css/table.css">
     <title>Все комнаты</title>
     <style>
-        .table-container {
-            width: 100%;
-            max-width: 1440px;
-            margin: 0 auto;
-            border-radius: 8px;
-            font-family: sans-serif;
-        }
-
-        .table-header, .table-row {
-            display: grid;
-            grid-template-columns: 100px 2fr 1.4fr repeat(4, 1.5fr);
-            align-items: center;
-            padding: 12px 20px;
-        }
-
-        .table-header {
-            background-color: #171212;
-            color: white;
-            font-weight: bold;
-            text-transform: uppercase;
-            font-size: 13px;
-            letter-spacing: 0.5px;
-        }
-
-        .table-row {
-            border-bottom: 1px solid #eee;
+        .actions a {
+            color: #171212;
         }
     </style>
 </head>
@@ -61,7 +37,6 @@
 
                 <div class="actions">
                     <a href="/admin/room/delete?room_id=<?= $room->buildingId ?>"
-                       onclick="return confirm('Удалить комнату?')"
                        style="color: red;">Удалить</a>
                 </div>
             </div>

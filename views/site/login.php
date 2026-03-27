@@ -21,8 +21,8 @@
                 ?>
                 <form method="post">
                     <input name="csrf_token" type="hidden" value="<?= app()->auth::generateCSRF() ?>">
-                    <label>Логин<input type="text" name="login" placeholder="Логин пользователя"></label>
-                    <label>Пароль<input type="password" name="password" placeholder="Ваш пароль"></label>
+                    <label>Логин<input type="text" name="login" placeholder="Логин пользователя" required></label>
+                    <label>Пароль<input type="password" name="password" placeholder="Ваш пароль" required></label>
                     <button>Войти</button>
                 </form>
             <?php endif; ?>

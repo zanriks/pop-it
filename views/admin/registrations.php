@@ -3,45 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../public/css/table.css">
     <title>Все бронирования</title>
 </head>
 <body>
 <h2>Все бронирования</h2>
 <a href="/admin/admin_panel">Назад</a>
 
-<table>
-    <thead>
-    <tr>
-        <th>Заказ</th>
-        <th>Жилец</th>
-        <th>Комната</th>
-        <th>Даты</th>
-        <th>Статус</th>
-        <th>Оплата</th>
-        <th>Действия</th>
-    </tr>
-    </thead>
-    <tbody>
+<div class="table-container">
+    <div class="table-header">
+        <div>Заказ</div>
+        <div>Жилец</div>
+        <div>Комната</div>
+        <div>Даты</div>
+        <div>Статус</div>
+        <div>Оплата</div>
+        <div>Действия</div>
+    </div>
     <?php foreach ($registrations as $reg): ?>
-        <tr>
-            <td>
-                <?= $reg->orderNumber ?><br>
-                <small><?= $reg->orderDate ?></small>
-            </td>
-            <td>
-                <?= $reg->tenant->user->surname ?>
-                <?= $reg->tenant->user->name ?>
-            </td>
-            <td>
-                №<?= $reg->room->roomNumber ?><br>
-                <small><?= $reg->room->building->buildingName ?></small>
-            </td>
-            <td>
-                <?= $reg->checkInDate ?><br>
-                <?= $reg->checkOutDate ?>
-            </td>
-            <td>
-                    <span>
+        <div class="table-row">
+            <div><?= $reg->orderNumber ?><br><small><?= $reg->orderDate ?></small></div>
+            <div><?= $reg->tenant->user->surname ?><?= $reg->tenant->user->name ?></div>
+            <div>№<?= $reg->room->roomNumber ?><br><small><?= $reg->room->building->buildingName ?></small></div>
+            <div><?= $reg->checkInDate ?><br><?= $reg->checkOutDate ?></div>
+            <div><span>
                         <?= match($reg->status) {
                             'awaiting' => 'Ожидает',
                             'confirmed' => 'Подтверждено',
@@ -51,15 +36,15 @@
                             default => $reg->status
                         } ?>
                     </span>
-            </td>
-            <td>
+            </div>
+            <div>
                 <?= $reg->paymentId ? 'Оплачено' : 'Не оплачено' ?>
-            </td>
-            <td>
+            </div>
+            <div>
                 <?php if ($reg->status === 'awaiting'): ?>
                     <form method="POST" action="/admin/registration/confirm">
                         <input type="hidden" name="csrf_token" value="<?= app()->auth->generateCSRF() ?>">
-                        <input type="hidden" name="registrationId" value="<?= $reg->registrationId ?>">
+                        <input type="hidden" name="id" value="<?= $reg->registrationId ?>">
                         <button type="submit">Подтвердить</button>
                     </form>
                 <?php endif; ?>
@@ -76,13 +61,12 @@
                     <form method="POST" action="/admin/registration/checkout">
                         <input type="hidden" name="csrf_token" value="<?= app()->auth->generateCSRF() ?>">
                         <input type="hidden" name="registrationId" value="<?= $reg->registrationId ?>">
-                        <button type="submit" onclick="return confirm('Выселить жильца?')">Выселить</button>
+                        <button type="submit">Выселить</button>
                     </form>
                 <?php endif; ?>
-            </td>
-        </tr>
+            </div>
+        </div>
     <?php endforeach; ?>
-    </tbody>
-</table>
+</div>
 </body>
 </html>

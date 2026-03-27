@@ -16,16 +16,11 @@ class RegistrationController
     {
         $rooms = Room::whereColumn('numberOfTenants', '<', 'totalBeds')->get();
 
-        $currentUser = Auth::user();
-        $tenant = Tenant::where('userId', $currentUser->id)->first();
-        var_dump($tenant);
-
         if ($request->method === 'POST') {
             $data = $request->all();
 
             $currentUser = Auth::user();
             $tenant = Tenant::where('userId', $currentUser->id)->first();
-            var_dump($tenant);
 
             if (!$tenant) {
                 return new View('registration.create', [
@@ -76,7 +71,6 @@ class RegistrationController
                 'checkOutDate' => $data['checkOutDate'],
                 'orderDate' => date('Y-m-d H:i:s'),
                 'orderNumber' => 'ORD-' . time(),
-                'paymentId' => null,
                 'status' => 'awaiting',
             ]);
 
@@ -98,7 +92,7 @@ class RegistrationController
         $id = $request->get('registrationId');
         $reg = Registration::find($id);
 
-        if ($reg && $reg->status === 'awaiting' || $reg->status === 'paid') {
+        if ($reg && $reg->status === 'confirmed' || $reg->status === 'paid') {
             $reg->update([
                 'status' => 'active',
             ]);
@@ -137,21 +131,36 @@ class RegistrationController
     public function myBookings(): string
     {
         $currentUser = Auth::user();
-        $tenant = Tenant::where('userId', $currentUser->userID)->first();
+        $tenant = Tenant::where('userId', $currentUser->id)->first();
 
-        $bookings = Registration::where('tenantId', $tenant->tenantID)->with(['room.building'])->orderBy('orderDate', 'desc')->get();
+        if (!$tenant) {
+            return new View('registration.my_bookings', ['bookings' => []]);
+        }
+
+        $bookings = Registration::where('tenantId', $tenant->tenantId)->with(['room.building'])->orderBy('orderDate', 'desc')->get();
         return new View('registration.my_bookings', ['bookings' => $bookings]);
     }
 
     public function cancelBooking(Request $request): string
     {
-        $id = $request->get('id');
+        $registrationId = $request->get('registrationId');
+
+        if (!$registrationId) {
+            app()->route->redirect('/profile/my_bookings');
+            return '';
+        }
+
         $currentUser = Auth::user();
-        $tenant = Tenant::where('userId', $currentUser->userID)->first();
+        $tenant = Tenant::where('userId', $currentUser->id)->first();
 
-        $booking = Registration::find($id);
+        if (!$tenant) {
+            app()->route->redirect('/profile/my_bookings');
+            return '';
+        }
 
-        if ($booking && $booking->tenantId === $tenant->tenantId && in_array($booking->status, ['paid', 'unpaid', 'awaiting'])) {
+        $booking = Registration::find($registrationId);
+
+        if ($booking && $booking->tenantId === $tenant->tenantId && in_array($booking->status, ['awaiting','confirmed','active','completed','cancelled'])) {
             $booking->update(['status' => 'cancelled']);
         }
         app()->route->redirect('/profile/my_bookings');

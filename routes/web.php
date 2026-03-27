@@ -31,10 +31,11 @@ Route::add('POST', '/admin/room/delete', [Controller\RoomController::class, 'del
 // Управление бронированиями
 Route::add('GET', '/admin/registrations', [Controller\AdminController::class, 'allRegistrations'])->middleware('auth', 'admin');
 Route::add('POST', '/admin/registration/confirm', [Controller\AdminController::class, 'confirmRegistration'])->middleware('auth', 'admin');
-Route::add('POST', '/admin/registration/checkin', [Controller\RegistrationController::class, 'checkIn'])->middleware('auth', 'admin');
-Route::add('POST', '/admin/registration/checkout', [Controller\RegistrationController::class, 'checkOut'])->middleware('auth', 'admin');
+Route::add('POST', '/admin/registration/checkin', [Controller\RegistrationController::class, 'checkIn'])->middleware('auth', 'admin', 'commandant');
+Route::add('POST', '/admin/registration/checkout', [Controller\RegistrationController::class, 'checkOut'])->middleware('auth', 'admin', 'commandant');
 // Бронирование
-Route::add(['GET', 'POST'], '/tenant/booking/create', [Controller\RegistrationController::class, 'create'])->middleware('auth');
+Route::add('GET', '/tenant/booking/create', [Controller\RegistrationController::class, 'create'])->middleware('auth');
+Route::add('POST', '/tenant/booking/create', [Controller\RegistrationController::class, 'create'])->middleware('auth');
 // Мои брони
 Route::add('GET', '/profile/my_bookings', [Controller\RegistrationController::class, 'myBookings'])->middleware('auth');
 // Отмена брони
@@ -42,8 +43,12 @@ Route::add('POST', '/tenant/booking/cancel', [Controller\RegistrationController:
 
 // Отчёты
 Route::add('GET', '/admin/debtor_report', [Controller\AdminController::class, 'debtorReport'])->middleware('auth', 'admin');
+Route::add('GET', '/commandant/debtor_report', [Controller\AdminController::class, 'debtorReport'])->middleware('auth', 'commandant');
+
 
 // Оплата
-Route::add(['GET', 'POST'], '/payment/pay', [Controller\PaymentController::class, 'payBooking'])->middleware('auth');
+Route::add('GET', '/payment/pay', [Controller\PaymentController::class, 'payBooking'])->middleware('auth');
+Route::add('POST', '/payment/pay', [Controller\PaymentController::class, 'payBooking'])->middleware('auth');
 
-Route::add(['GET', 'POST'], '/user/create/tenant', [Controller\TenantController::class, 'createTenant'])->middleware('auth');
+Route::add('GET', '/user/create/tenant', [Controller\TenantController::class, 'createTenant'])->middleware('auth');
+Route::add('POST', '/user/create/tenant', [Controller\TenantController::class, 'createTenant'])->middleware('auth');

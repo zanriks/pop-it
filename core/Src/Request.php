@@ -27,9 +27,12 @@ class Request
         $this->body[$field] = $value;
     }
 
-    public function get($field)
+    public function get($key, $default = null)
     {
-        return $this->body[$field];
+        if ($this->method === 'GET') {
+            return $_GET[$key] ?? $default;
+        }
+        return $_POST[$key] ?? $default;
     }
 
     public function files(): array

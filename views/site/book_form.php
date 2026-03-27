@@ -8,24 +8,24 @@
     <title>Бронирование комнаты</title>
 </head>
 <body>
-    <h2>Бронирование комнаты</h2>
-    <div class="booking-form">
-        <form action="/room/booking" method="POST">
-            <input name="csrf_token" type="hidden" value="<?= app()->auth::generateCSRF() ?>"/>
+<h2>Бронирование комнаты</h2>
+<div class="booking-form">
+    <form action="/room/booking" method="POST">
+        <input name="csrf_token" type="hidden" value="<?= app()->auth::generateCSRF() ?>"/>
 
 
 
-            <label>Номер комнаты:</label>
-            <input type="name="checkInDate" required>
+        <label>Номер комнаты:</label>
+        <input type="name="checkInDate" required>
 
-            <label>Дата заезда:</label>
-            <input type="date" name="checkInDate" required>
+        <label>Дата заезда:</label>
+        <input type="date" name="checkInDate" required>
 
-            <label>Дата выезда:</label>
-            <input type="date" name="checkOutDate" required>
+        <label>Дата выезда:</label>
+        <input type="date" name="checkOutDate" required>
 
-            <button type="submit">Забронировать</button>
-        </form>
-    </div>
+        <button type="submit">Забронировать</button>
+    </form>
+</div>
 </body>
 </html>

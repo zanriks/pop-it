@@ -16,7 +16,7 @@
                 <p><strong>Номер заказа:</strong> <?= $registration->orderNumber ?></p>
                 <p><strong>Дата заезда:</strong> <?= $registration->checkInDate ?></p>
                 <p><strong>Дата выезда:</strong> <?= $registration->checkOutDate ?></p>
-                <p>К оплате: <?= $payment->paidAmount?> руб.</p>
+                <p>К оплате: <?= $payment->accrualAmount?> руб.</p>
             </div>
 
             <form action="/payment/pay" method="post">

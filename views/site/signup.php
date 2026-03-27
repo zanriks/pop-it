@@ -19,6 +19,8 @@
                 <label>Имя <input type="text" name="name" placeholder="Ваше имя"></label>
                 <label>Логин <input type="text" name="login" placeholder="Логин пользователя"></label>
                 <label>Пароль <input type="password" name="password" placeholder="Ваш пароль"></label>
+                <label>Серия паспорта <input type="text" name="passportSeries" required></label>
+                <label>Номер паспорта <input type="text" name="passportNumber" required></label>
                 <button>Зарегистрироваться</button>
             </form>
         </div>

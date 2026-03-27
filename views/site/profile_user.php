@@ -13,7 +13,6 @@
     <section class="profile-info">
         <h1>Профиль</h1>
         <p>Привет, <?= app()->auth::user()->name ?>!</p>
-        <a href="<?= app()->route->getUrl('/user/create/tenant')?>">Хотите стать жильцом?</a>
         <a href="<?= app()->route->getUrl('/tenant/booking/create') ?>">Забронировать комнату</a>
         <a href="<?= app()->route->getUrl('/profile/my_bookings') ?>">Мои бронирования</a>
         <a href="<?= app()->route->getUrl('/profile/edit') ?>">Редактировать профиль</a>

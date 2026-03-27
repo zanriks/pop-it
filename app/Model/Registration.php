@@ -24,10 +24,10 @@ class Registration extends Model
     ];
     public function tenant()
     {
-        return $this->hasMany(Tenant::class, 'tenantId', 'tenantId');
+        return $this->belongsTo(Tenant::class, 'tenantId', 'tenantId');
     }
     public function room()
     {
-        return $this->hasMany(Room::class, 'roomId', 'roomId');
+        return $this->belongsTo(Room::class, 'roomId', 'roomId');
     }
 }

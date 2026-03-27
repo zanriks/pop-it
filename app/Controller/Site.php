@@ -22,6 +22,8 @@ class Site
                 'name' => ['required', 'min:5'],
                 'login' => ['required', 'unique:users,login', 'min:6'],
                 'password' => ['required', 'min:8'],
+                'passportSeries' => ['required', 'min:4'],
+                'passportNumber' => ['required', 'min:6'],
             ], [
                 'required' => 'Поле :field пусто',
                 'unique' => 'Поле :field должно быть уникально',
@@ -30,8 +32,18 @@ class Site
             if ($validator->fails()) {
                 return new View('site.signup', ['message' => json_encode($validator->errors(), JSON_UNESCAPED_UNICODE)]);
             }
-            if (User::create($request->all())) {
+
+            $user = User::create($request->all());
+
+            if ($user) {
+                \Model\Tenant::create([
+                    'userId' => $user->id,
+                    'passportSeries' => $request->get('passportSeries'),
+                    'passportNumber' => $request->get('passportNumber'),
+                    'status' => 'unliving'
+                ]);
                 app()->route->redirect('/login');
+                return '';
             }
         }
         return new View('site.signup');

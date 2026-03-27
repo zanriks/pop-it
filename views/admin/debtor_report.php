@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Отчёт по должникам</title>
+    <link rel="stylesheet" href="../../public/css/table.css">
 </head>
 <body>
 <h2>Отчёт по должникам</h2>
@@ -13,55 +14,31 @@
     <p style="color: green; font-size: 1.2em;">Должников нет! Все жильцы оплатили.</p>
 <?php else: ?>
     <p><strong>Найдено должников:</strong> <?= count($debtors) ?></p>
-
-    <table>
-        <thead>
-        <tr>
-            <th>№ заказа</th>
-            <th>Жилец</th>
-            <th>Контакты</th>
-            <th>Комната</th>
-            <th>Период</th>
-            <th>Дней просрочки</th>
-            <th>Действия</th>
-        </tr>
-        </thead>
-        <tbody>
+<div class="table-container">
+    <div class="table-header">
+        <div>№ заказа</div>
+        <div>Жилец</div>
+        <div>Контакты</div>
+        <div>Комната</div>
+        <div>Период</div>
+        <div>Дней просрочки</div>
+        <div>Действия</div>
+    </div>
         <?php foreach ($debtors as $debtor):
             $checkIn = new DateTime($debtor->checkInDate);
             $today = new DateTime();
             $daysOverdue = $today->diff($checkIn)->days;
             ?>
-            <tr>
-                <td><?= $debtor->orderNumber ?></td>
-                <td>
-                    <?= $debtor->tenant->user->surname ?>
-                    <?= $debtor->tenant->user->name ?>
-                </td>
-                <td>
-                    <?= $debtor->tenant->user->phone ?><br>
-                    <?= $debtor->tenant->user->email ?>
-                </td>
-                <td>
-                    №<?= $debtor->room->roomNumber ?><br>
-                    <small><?= $debtor->room->building->buildingName ?></small>
-                </td>
-                <td>
-                    <?= $debtor->checkInDate ?><br>
-                    <?= $debtor->checkOutDate ?>
-                </td>
-                <td class="<?= $daysOverdue > 7 ? 'warning' : '' ?>">
-                    <?= $daysOverdue ?> дн.
-                </td>
-                <td>
-                    <a href="/admin/registration/confirm?id=<?= $debtor->registrationID ?>" class="btn">
-                        Зафиксировать оплату
-                    </a>
-                </td>
-            </tr>
+            <div class="table-row">
+                <div><?= $debtor->orderNumber ?></div>
+                <div><?= $debtor->tenant->user->surname ?><?= $debtor->tenant->user->name ?></div>
+                <div><?= $debtor->tenant->user->phone ?><br><?= $debtor->tenant->user->email ?></div>
+                <div>№<?= $debtor->room->roomNumber ?><br><small><?= $debtor->room->building->buildingName ?></small></div>
+                <div><?= $debtor->checkInDate ?><br><?= $debtor->checkOutDate ?></div>
+                <div class="<?= $daysOverdue > 7 ? 'warning' : '' ?>"><?= $daysOverdue ?> дн.</div>
+                <div><a href="/admin/registration/confirm?id=<?= $debtor->registrationID ?>">Зафиксировать оплату</a></div>
+            </div>
         <?php endforeach; ?>
-        </tbody>
-    </table>
 <?php endif; ?>
 </body>
 </html>

@@ -11,7 +11,7 @@
 <h2>Бронирование комнаты</h2>
 
 <?php if (!empty($errors)): ?>
-    <div class="alert alert-danger">
+    <div>
         <?php foreach ($errors as $field => $error): ?>
             <p><?= htmlspecialchars($error) ?></p>
         <?php endforeach; ?>
@@ -21,7 +21,7 @@
 <form method="post">
     <input name="csrf_token" type="hidden" value="<?= app()->auth->generateCSRF() ?>">
     <label>Комната:</label>
-    <select name="roomId" id="roomId" required>
+    <select name="roomId" required>
         <option value="">Выберите комнату</option>
         <?php foreach ($rooms as $room): ?>
             <option value="<?= $room->roomId ?>">

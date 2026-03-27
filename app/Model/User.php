@@ -50,8 +50,12 @@ class User extends Model implements IdentityInterface
         return self::where(['login' => $credentials['login'],
             'password' => md5($credentials['password'])])->first();
     }
-    public function isAdmin()
+    public function isAdmin(): string
     {
         return $this->role === 'admin';
+    }
+    public function isCommandant(): string
+    {
+        return $this->role === 'commandant';
     }
 }

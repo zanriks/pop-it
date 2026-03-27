@@ -23,6 +23,6 @@ class Room extends Model
     ];
     public function building()
     {
-        return $this->hasMany(Building::class, 'buildingId');
+        return $this->belongsTo(Building::class, 'buildingId', 'buildingId');
     }
 }

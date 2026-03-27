@@ -31,7 +31,7 @@ class AdminController
     }
     public function debtorReport(): string
     {
-        $debtors = Registration::where('status', 'unconfirmed')->whereNull('paymentId')->with(['tenant.user', 'room'])->get();
+        $debtors = Registration::where('status', 'cancelled')->whereNull('paymentId')->with(['tenant.user', 'room'])->get();
         return new View('admin.debtor_report', ['debtors' => $debtors]);
     }
     public function confirmRegistration(Request $request): string
@@ -48,7 +48,6 @@ class AdminController
     public function allRegistrations(): string
     {
         $registrations = Registration::with(['tenant.user', 'room.building'])->get();
-        var_dump($registrations);
         return new View('admin.registrations', ['registrations' => $registrations]);
     }
 }

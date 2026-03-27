@@ -28,7 +28,7 @@ class UserController
         if (!$user) {
             app()->route->redirect('/profile/user');
         }
-        return new View('admin.profile_edit', ['user' => $user]);
+        return new View('site.profile_edit', ['user' => $user]);
     }
     public function profile_update(Request $request): string
     {
@@ -50,7 +50,7 @@ class UserController
         ]);
 
         if ($validator->fails()) {
-            return new View('admin.profile_edit', ['message' => json_encode($validator->errors(), JSON_UNESCAPED_UNICODE)]);
+            return new View('site.profile_edit', ['message' => json_encode($validator->errors(), JSON_UNESCAPED_UNICODE)]);
         }
         $data = $request->all();
 
@@ -59,6 +59,6 @@ class UserController
             $user->update($data);
             app()->route->redirect('/profile/user');
         }
-        return (new View())->render('admin.profile_edit', ['user' => $user]);
+        return (new View())->render('site.profile_edit', ['user' => $user]);
     }
 }
