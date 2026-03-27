@@ -4,6 +4,7 @@ use Src\Route;
 Route::add('GET', '/', [Controller\Site::class, 'index']);
 Route::add(['GET', 'POST'], '/signup', [Controller\Site::class, 'signup']);
 Route::add(['GET', 'POST'], '/login', [Controller\Site::class, 'login']);
+Route::add('GET', '/room/list', [Controller\RoomController::class, 'list_rooms']);
 Route::add('GET', '/logout', [Controller\Site::class, 'logout'])->middleware('auth');
 //Профиль пользователя
 Route::add('GET', '/profile/user', [Controller\UserController::class, 'profile'])->middleware('auth');
@@ -31,8 +32,8 @@ Route::add('POST', '/admin/room/delete', [Controller\RoomController::class, 'del
 // Управление бронированиями
 Route::add('GET', '/admin/registrations', [Controller\AdminController::class, 'allRegistrations'])->middleware('auth', 'admin');
 Route::add('POST', '/admin/registration/confirm', [Controller\AdminController::class, 'confirmRegistration'])->middleware('auth', 'admin');
-Route::add('POST', '/admin/registration/checkin', [Controller\RegistrationController::class, 'checkIn'])->middleware('auth', 'admin', 'commandant');
-Route::add('POST', '/admin/registration/checkout', [Controller\RegistrationController::class, 'checkOut'])->middleware('auth', 'admin', 'commandant');
+Route::add('POST', '/admin/registration/checkin', [Controller\RegistrationController::class, 'checkIn'])->middleware('auth', 'admin');
+Route::add('POST', '/admin/registration/checkout', [Controller\RegistrationController::class, 'checkOut'])->middleware('auth', 'admin');
 // Бронирование
 Route::add('GET', '/tenant/booking/create', [Controller\RegistrationController::class, 'create'])->middleware('auth');
 Route::add('POST', '/tenant/booking/create', [Controller\RegistrationController::class, 'create'])->middleware('auth');

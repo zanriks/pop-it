@@ -20,14 +20,15 @@ class Site
         if ($request->method === 'POST') {
             $validator = new Validator($request->all(), [
                 'name' => ['required', 'min:5'],
-                'login' => ['required', 'unique:users,login', 'min:6'],
+                'login' => ['required', 'unique', 'min:6'],
                 'password' => ['required', 'min:8'],
-                'passportSeries' => ['required', 'min:4'],
-                'passportNumber' => ['required', 'min:6'],
+                'passportSeries' => ['required', 'max:4`'],
+                'passportNumber' => ['required', 'max:6'],
             ], [
                 'required' => 'Поле :field пусто',
                 'unique' => 'Поле :field должно быть уникально',
-                'min' => 'Поле :field должно содержать минимум :min символов'
+                'min' => 'Поле :field должно содержать минимум :min символов',
+                'max' => 'Поле :field должно содержать максимум :max символов'
             ]);
             if ($validator->fails()) {
                 return new View('site.signup', ['message' => json_encode($validator->errors(), JSON_UNESCAPED_UNICODE)]);

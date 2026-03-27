@@ -39,6 +39,7 @@ class RoomController
     public function list_rooms(): string
     {
         $rooms = Room::all();
+
         return new View('admin.list_rooms', ['rooms' => $rooms]);
     }
     // Удаление записи о комнате

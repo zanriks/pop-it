@@ -24,7 +24,6 @@
         <div>Мест</div>
         <div>Действия</div>
     </div>
-
     <?php if (!empty($rooms)): ?>
         <?php foreach ($rooms as $room): ?>
             <div class="table-row">

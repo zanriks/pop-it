@@ -5,6 +5,7 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="../../public/css/table.css">
     <title>Главная</title>
 </head>
 <body>
@@ -26,24 +27,33 @@
             </div>
         </section>
         <section class="catalog-rooms">
-            <div>
-                <h1>Каталог комнат</h1>
+            <div class="table-container">
+                <div class="table-header">
+                    <div>ID здания</div>
+                    <div>Название здания</div>
+                    <div>№</div>
+                    <div>Этаж</div>
+                    <div>Тип</div>
+                    <div>Мест</div>
+                    <div>Действия</div>
+                </div>
 
-                <div class="rooms-grid" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;">
+                <?php if (!empty($rooms)): ?>
                     <?php foreach ($rooms as $room): ?>
-                        <div class="room-card" style="border: 1px solid #ccc; padding: 15px; border-radius: 8px;">
-                            <h3>Комната №<?= $room->roomNumber ?></h3>
-                            <p><strong>Этаж:</strong> <?= $room->floor ?></p>
-                            <p><strong>Тип:</strong> <?= $room->roomType ?></p>
-                            <p><strong>Мест:</strong> <?= $room->numberOfTenants ?> / <?= $room->totalBeds ?></p>
-
-                            <!-- Если есть связь с моделью Building -->
-                            <p><strong>Корпус:</strong> <?= $room->building->name ?? 'Не указан' ?></p>
-
-                            <a href="/room/view?id=<?= $room->roomId ?>" class="btn">Подробнее</a>
+                        <div class="table-row">
+                            <div><?= $room->buildingId ?></div>
+                            <div><?= $room->buildingName ?? 'ID: '.$room->buildingId ?></div>
+                            <div><?= $room->roomNumber ?></div>
+                            <div><?= $room->floor ?></div>
+                            <div><?= $room->roomType ?></div>
+                            <div><?= $room->numberOfTenants ?> / <?= $room->totalBeds ?></div>
                         </div>
                     <?php endforeach; ?>
-                </div>
+                <?php else: ?>
+                    <div class="table-row">
+                        <div>Комнаты не найдены</div>
+                    </div>
+                <?php endif; ?>
             </div>
         </section>
     </main>

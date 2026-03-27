@@ -10,6 +10,8 @@ return [
         'required' => \Validators\RequireValidator::class,
         'unique' => \Validators\UniqueValidator::class,
         'min' => \Validators\MinRule::class,
+        'max' => \Validators\MaxRule::class,
+        'email' => \Validators\EmailValidator::class,
     ],
     'routeAppMiddleware' => [
         'csrf' => \Middlewares\CSRFMiddleware::class,

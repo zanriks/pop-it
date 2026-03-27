@@ -14,7 +14,6 @@ abstract class AbstractValidator
     protected array $messageKeys = [];
     //Базовое сообщение об ошибке
     protected string $message = '';
-
     public function __construct(string $fieldName, $value, $args = [], string $message = null)
     {
         $this->field = $fieldName;
