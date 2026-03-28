@@ -3,11 +3,10 @@
 namespace Controller;
 
 use Model\Building;
-use Model\Registration;
 use Model\Room;
-use Src\Request;
-use Src\Validator\Validator;
-use Src\View;
+use Framework\Request;
+use Framework\Validator\Validator;
+use Framework\View;
 
 class RoomController
 {

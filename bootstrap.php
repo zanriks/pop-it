@@ -1,7 +1,7 @@
 <?php
-const DIR_CONFIG = '/../config';
+const DIR_CONFIG = '/config';
 
-require_once __DIR__ . '/../vendor/autoload.php';
+require_once __DIR__ . '/vendor/autoload.php';
 
 function getConfigs(string $path = DIR_CONFIG): array
 {
@@ -15,8 +15,8 @@ function getConfigs(string $path = DIR_CONFIG): array
     return $settings;
 }
 
-require_once __DIR__ . '/../routes/web.php';
-$app = new Src\Application(new Src\Settings(getConfigs()));
+require_once __DIR__ . '/routes/web.php';
+$app = new Framework\Application(new Framework\Settings(getConfigs()));
 
 function app() {
     global $app;

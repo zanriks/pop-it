@@ -2,7 +2,7 @@
 
 namespace Validators;
 
-use Src\Validator\AbstractValidator;
+use Framework\Validator\AbstractValidator;
 
 class EmailValidator extends AbstractValidator
 {
@@ -10,6 +10,7 @@ class EmailValidator extends AbstractValidator
 
     public function rule(): bool
     {
-        return filter_var($this->value, FILTER_VALIDATE_EMAIL) !== false;
+        $pattern = '/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/';
+        return preg_match($pattern, $this->value);
     }
 }

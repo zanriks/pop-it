@@ -3,7 +3,6 @@
 namespace Middlewares;
 
 use Model\User;
-use Src\Request;
 
 class AdminMiddleware
 {

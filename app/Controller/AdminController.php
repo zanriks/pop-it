@@ -2,11 +2,12 @@
 
 namespace Controller;
 
+use Framework\Validator\Validator;
 use Illuminate\Support\Str;
 use Model\Registration;
 use Model\User;
-use Src\Request;
-use Src\View;
+use Framework\Request;
+use Framework\View;
 
 class AdminController
 {

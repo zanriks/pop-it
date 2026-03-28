@@ -2,7 +2,7 @@
 
 namespace Validators;
 
-use Src\Validator\AbstractValidator;
+use Framework\Validator\AbstractValidator;
 class MaxRule extends AbstractValidator
 {
     public function rule(): bool

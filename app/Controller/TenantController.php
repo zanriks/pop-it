@@ -3,8 +3,8 @@
 namespace Controller;
 
 use Model\Tenant;
-use Src\Request;
-use Src\View;
+use Framework\Request;
+use Framework\View;
 
 class TenantController
 {

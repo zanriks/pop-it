@@ -2,12 +2,11 @@
 
 namespace Controller;
 
-use Model\Post;
-use Src\Validator\Validator;
-use Src\View;
-use Src\Request;
+use Framework\Validator\Validator;
+use Framework\View;
+use Framework\Request;
 use Model\User;
-use Src\Auth\Auth;
+use Framework\Auth\Auth;
 class Site
 {
     public function index(): string

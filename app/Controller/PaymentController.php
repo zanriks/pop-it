@@ -4,8 +4,8 @@ namespace Controller;
 
 use Model\Payment;
 use Model\Registration;
-use Src\Request;
-use Src\View;
+use Framework\Request;
+use Framework\View;
 
 class PaymentController
 {

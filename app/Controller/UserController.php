@@ -2,10 +2,10 @@
 
 namespace Controller;
 use Model\User;
-use Src\Auth\Auth;
-use Src\Request;
-use Src\Validator\Validator;
-use Src\View;
+use Framework\Auth\Auth;
+use Framework\Request;
+use Framework\Validator\Validator;
+use Framework\View;
 
 class UserController
 {
@@ -54,10 +54,8 @@ class UserController
 
         $validator = new Validator($request->all(), [
             'name' => ['required', 'min:4'],
-            'email' => ['required', 'email'],
         ], [
             'required' => 'Поле :field обязательно',
-            'email' => 'Некорректный формат email',
             'min' => 'Минимум :min символов'
         ]);
 

@@ -5,34 +5,24 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="../../public/css/form.css">
     <title>Изменение информации о здании</title>
 </head>
 <body>
-<h1>Редактирование здания <?= $building->id ?></h1>
+<div class="form-center">
+    <div class="form">
+        <h1>Редактирование здания <?= $building->id ?></h1>
 
-<form action="/admin/building/update?id=<?= $building->id ?>" method="POST">
-    <input name="csrf_token" type="hidden" value="<?= app()->auth::generateCSRF() ?>"/>
-    <input type="hidden" name="id" value="<?= $building->id ?>">
-
-    <div class="form-group">
-        <label>Название здания:</label>
-        <input type="text" name="name" value="<?= $building->buildingName ?>" required>
+        <form action="/admin/building/update?id=<?= $building->id ?>" method="POST">
+            <input name="csrf_token" type="hidden" value="<?= app()->auth::generateCSRF() ?>"/>
+            <input type="hidden" name="id" value="<?= $building->id ?>">
+            <label>Название здания: <input type="text" name="name" value="<?= $building->buildingName ?>" required></label>
+            <label>Адрес: <input type="text" name="address" value="<?= $building->address ?>" required></label>
+            <label>Количество этажей: <input type="number" name="floors" value="<?= $building->floors ?>"></label>
+            <button type="submit" class="btn-save">Сохранить изменения</button>
+            <a href="/admin/admin_panel" class="btn-cancel">Отмена</a>
+        </form>
     </div>
-
-    <div class="form-group">
-        <label>Адрес:</label>
-        <input type="text" name="address" value="<?= $building->address ?>" required>
-    </div>
-
-    <div class="form-group">
-        <label>Количество этажей:</label>
-        <input type="number" name="floors" value="<?= $building->floors ?>">
-    </div>
-
-    <div style="margin-top: 20px;">
-        <button type="submit" class="btn-save">Сохранить изменения</button>
-        <a href="/admin/admin_panel" class="btn-cancel">Отмена</a>
-    </div>
-</form>
+</div>
 </body>
 </html>

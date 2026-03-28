@@ -2,8 +2,8 @@
 
 namespace Middlewares;
 
-use Src\Auth\Auth;
-use Src\Request;
+use Framework\Auth\Auth;
+use Framework\Request;
 
 class AuthMiddleware
 {

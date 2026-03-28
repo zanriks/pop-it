@@ -3,8 +3,8 @@
 namespace Middlewares;
 
 use Exception;
-use Src\Request;
-use Src\Session;
+use Framework\Request;
+use Framework\Session;
 
 class CSRFMiddleware
 {

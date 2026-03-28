@@ -5,10 +5,10 @@ namespace Controller;
 use Model\Registration;
 use Model\Room;
 use Model\Tenant;
-use Src\Auth\Auth;
-use Src\Request;
-use Src\Validator\Validator;
-use Src\View;
+use Framework\Auth\Auth;
+use Framework\Request;
+use Framework\Validator\Validator;
+use Framework\View;
 
 class RegistrationController
 {
