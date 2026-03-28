@@ -22,13 +22,14 @@ class Site
                 'name' => ['required', 'min:5'],
                 'login' => ['required', 'unique', 'min:6'],
                 'password' => ['required', 'min:8'],
-                'passportSeries' => ['required', 'max:4`'],
-                'passportNumber' => ['required', 'max:6'],
+                'passportSeries' => ['required', 'max:4', 'numeric'],
+                'passportNumber' => ['required', 'max:6', 'numeric'],
             ], [
                 'required' => 'Поле :field пусто',
                 'unique' => 'Поле :field должно быть уникально',
                 'min' => 'Поле :field должно содержать минимум :min символов',
-                'max' => 'Поле :field должно содержать максимум :max символов'
+                'max' => 'Поле :field должно содержать максимум :max символов',
+                'numeric' => 'Поле :field должно содержать числовое значение'
             ]);
             if ($validator->fails()) {
                 return new View('site.signup', ['message' => json_encode($validator->errors(), JSON_UNESCAPED_UNICODE)]);

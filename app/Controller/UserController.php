@@ -9,40 +9,52 @@ use Src\View;
 
 class UserController
 {
-    public function profile(): string
+    public function profile(Request $request): string
     {
         $user = Auth::user();
         return new View('site.profile_user', ['user' => $user]);
     }
     public function profile_edit(Request $request): string
     {
-        $id = $request->get('id');
+        $id = Auth::user()->id;
         $currentUser = Auth::user();
 
+        if (!$currentUser) {
+            app()->route->redirect('/login');
+            return '';
+        }
         // Проверка на то что редактировать профиль может только сам пользователь или админ
         if($id != $currentUser->id && $currentUser->role !== 'admin'){
             app()->route->redirect('/profile/user');
+            return '';
         }
 
         $user = User::find($id);
         if (!$user) {
             app()->route->redirect('/profile/user');
+            return '';
         }
         return new View('site.profile_edit', ['user' => $user]);
     }
     public function profile_update(Request $request): string
     {
-        $id = $request->get('id');
-        $currentUser = User::user();
+        $currentUser = Auth::user();
 
-        if($id != $currentUser->id && $currentUser->role !== 'admin'){
+        if (!$currentUser) {
+            app()->route->redirect('/login');
+            return '';
+        }
+
+        $id = $request->get('id');
+
+        if ($id !== (int)$currentUser->id && $currentUser->role !== 'admin') {
             app()->route->redirect('/profile/user');
+            return '';
         }
 
         $validator = new Validator($request->all(), [
             'name' => ['required', 'min:4'],
             'email' => ['required', 'email'],
-            'password' => ['nullable', 'min:8',],
         ], [
             'required' => 'Поле :field обязательно',
             'email' => 'Некорректный формат email',
@@ -50,7 +62,10 @@ class UserController
         ]);
 
         if ($validator->fails()) {
-            return new View('site.profile_edit', ['message' => json_encode($validator->errors(), JSON_UNESCAPED_UNICODE)]);
+            return new View('site.profile_edit', [
+                'message' => json_encode($validator->errors(), JSON_UNESCAPED_UNICODE),
+                'user' => User::find($id)
+            ]);
         }
         $data = $request->all();
 
@@ -58,7 +73,10 @@ class UserController
         if ($user) {
             $user->update($data);
             app()->route->redirect('/profile/user');
+            return '';
         }
-        return (new View())->render('site.profile_edit', ['user' => $user]);
+
+        app()->route->redirect('/profile/user');
+        return '';
     }
 }

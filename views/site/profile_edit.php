@@ -6,39 +6,24 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Изменение информации</title>
+    <link rel="stylesheet" href="../../public/css/form.css">
 </head>
 <body>
-<h1>Редактирование профиля </h1>
+<div class="form-center">
+    <div class="form">
+        <h1>Редактирование профиля </h1>
 
-<form action="/profile/update?id=<?= $user->id ?>" method="POST">
-    <input name="csrf_token" type="hidden" value="<?= app()->auth::generateCSRF() ?>"/>
-
-    <div class="form-group">
-        <label>Фамилия:</label>
-        <input type="text" name="surname" value="<?= $user->surname ?>" required>
+        <form action="/profile/update?id=<?= $user->id ?>" method="post">
+            <input name="csrf_token" type="hidden" value="<?= app()->auth::generateCSRF() ?>"/>
+            <label>Фамилия: <input type="text" name="surname" value="<?= $user->surname ?>" required></label>
+            <label>Имя: <input type="text" name="name" value="<?= $user->name ?>" required></label>
+            <label>Отчество (при наличии): <input type="text" name="patronymic" value="<?= $user->patronymic ?>"></label>
+            <label>Номер телефона:<input type="tel" name="phone" value="<?= $user->phone ?>" required></label>
+            <label>Почта:<input type="email" name="email" value="<?= $user->email ?>"></label>
+            <button type="submit">Сохранить изменения</button>
+            <a href="/admin/admin_panel">Отмена</a>
+        </form>
     </div>
-
-    <div class="form-group">
-        <label>Имя:</label>
-        <input type="text" name="name" value="<?= $user->name ?>" required>
-    </div>
-
-    <div class="form-group">
-        <label>Отчество (при наличии):</label>
-        <input type="text" name="patronymic" value="<?= $user->patronymic ?>">
-    </div>
-    <div class="form-group">
-        <label>Номер телефона:</label>
-        <input type="tel" name="phone" value="<?= $user->phone ?>" required>
-    </div>
-    <div class="form-group">
-        <label>Почта:</label>
-        <input type="email" name="email" value="<?= $user->email ?>">
-    </div>
-    <div style="margin-top: 20px;">
-        <button type="submit">Сохранить изменения</button>
-        <a href="/admin/admin_panel">Отмена</a>
-    </div>
-</form>
+</div>
 </body>
 </html>
