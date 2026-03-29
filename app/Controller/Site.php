@@ -19,8 +19,8 @@ class Site
         if ($request->method === 'POST') {
             $validator = new Validator($request->all(), [
                 'name' => ['required', 'min:5'],
-                'login' => ['required', 'unique', 'min:6'],
-                'password' => ['required', 'min:8'],
+                'login' => ['required', 'unique:users,login', 'min:6', 'login'],
+                'password' => ['required', 'min:8', 'password'],
                 'passportSeries' => ['required', 'max:4', 'numeric'],
                 'passportNumber' => ['required', 'max:6', 'numeric'],
             ], [
@@ -28,7 +28,8 @@ class Site
                 'unique' => 'Поле :field должно быть уникально',
                 'min' => 'Поле :field должно содержать минимум :min символов',
                 'max' => 'Поле :field должно содержать максимум :max символов',
-                'numeric' => 'Поле :field должно содержать числовое значение'
+                'numeric' => 'Поле :field должно содержать числовое значение',
+                'password' => 'Поле :field должно быть на английском языке',
             ]);
             if ($validator->fails()) {
                 return new View('site.signup', ['message' => json_encode($validator->errors(), JSON_UNESCAPED_UNICODE)]);
@@ -51,6 +52,20 @@ class Site
     }
     public function login(Request $request): string
     {
+        if ($request->method === 'POST') {
+            $validator = new Validator($request->all(), [
+                'login' => ['required', 'unique:users,login', 'min:6', 'login'],
+                'password' => ['required', 'min:8', 'password'],
+            ], [
+                'required' => 'Поле :field пусто',
+                'unique' => 'Поле :field должно быть уникально',
+                'min' => 'Поле :field должно содержать минимум :field символов',
+                'password' => 'Поле :field должно быть на англйиском языке',
+            ]);
+            if ($validator->fails()) {
+                return new View('site.signup', ['message' => json_encode($validator->errors(), JSON_UNESCAPED_UNICODE)]);
+            }
+        }
         if ($request->method === 'GET') {
             return new View('site.login');
         }

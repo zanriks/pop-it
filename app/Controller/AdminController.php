@@ -19,7 +19,22 @@ class AdminController
     // Метод добавления пользователя администратором
     public function admin_signup_user(Request $request): string
     {
-        if ($request->method === 'POST' && User::create($request->all())) {
+        if ($request->method === 'POST') {
+            $validator = new Validator($request->all(), [
+                'name' => ['required', 'min:5'],
+                'login' => ['required', 'unique:users,login', 'min:6', 'login'],
+                'password' => ['required', 'min:8', 'password'],
+                'email' => ['required', 'email'],
+            ], [
+                'required' => 'Поле :field пусто',
+                'unique' => 'Поле :field должно быть уникально',
+                'min' => 'Поле :field должно содержать минимум :min символов',
+                'max' => 'Поле :field должно содержать максимум :max символов',
+                'numeric' => 'Поле :field должно содержать числовое значение'
+            ]);
+            if ($validator->fails()) {
+                return new View('site.signup', ['message' => json_encode($validator->errors(), JSON_UNESCAPED_UNICODE)]);
+            }
             app()->route->redirect('/');
         }
         return new View('admin.admin_signup');

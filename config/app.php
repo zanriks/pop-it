@@ -14,6 +14,9 @@ return [
         'max' => \Validators\MaxRule::class,
         'email' => \Validators\EmailValidator::class,
         'cyrillic' => \Validators\CyrillicValidator::class,
+        'numeric' => \Validators\NumericValidator::class,
+        'password' => \Validators\PasswordValidator::class,
+        'login' => \Validators\LoginValidator::class
     ],
     'routeAppMiddleware' => [
         'csrf' => \Middlewares\CSRFMiddleware::class,

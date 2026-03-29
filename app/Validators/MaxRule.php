@@ -5,6 +5,7 @@ namespace Validators;
 use Framework\Validator\AbstractValidator;
 class MaxRule extends AbstractValidator
 {
+    protected string $message = 'Поле :field не правильный формат';
     public function rule(): bool
     {
         $max = (int) $this->args[0];

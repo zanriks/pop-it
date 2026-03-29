@@ -6,6 +6,7 @@ use Framework\Validator\AbstractValidator;
 
 class MinRule extends AbstractValidator
 {
+    protected string $message = 'Поле :field не правильный формат';
     public function rule(): bool
     {
         $min = (int) $this->args[0];
