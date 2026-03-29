@@ -32,8 +32,21 @@ class BuildingController
     // Список всех зданий
     public function list_buildings(Request $request): string
     {
-        $buildings = Building::all();
-        return new View('admin.list_buildings', ['buildings' => $buildings]);
+        $search = $request->get('search');
+
+        if ($search) {
+            $buildings = Building::where('buildingName', 'like', "%$search%")
+                ->orWhere('address', 'like', "%$search%")
+                ->orWhere('phone', 'like', "%$search%")
+                ->get();
+        } else {
+            $buildings = Building::all();
+        }
+
+        return new View('admin.list_buildings', [
+            'buildings' => $buildings,
+            'search' => $search
+        ]);
     }
     // Удаление записи о здании
     public function delete_building(Request $request): string

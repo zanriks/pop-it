@@ -36,11 +36,24 @@ class RoomController
         return new View('admin.room_create', ['buildings' => $buildings]);
     }
     // Список всех комнат
-    public function list_rooms(): string
+    public function list_rooms(Request $request): string
     {
-        $rooms = Room::all();
+        $search = $request->get('search');
 
-        return new View('admin.list_rooms', ['rooms' => $rooms]);
+        if ($search) {
+            // Поиск по номеру комнаты, этажу, типу
+            $rooms = Room::where('roomNumber', 'like', "%$search%")
+                ->orWhere('floor', 'like', "%$search%")
+                ->orWhere('roomType', 'like', "%$search%")
+                ->get();
+        } else {
+            $rooms = Room::all();
+        }
+
+        return new View('admin.list_rooms', [
+            'rooms' => $rooms,
+            'search' => $search
+        ]);
     }
     // Удаление записи о комнате
     public function delete_room(Request $request): string

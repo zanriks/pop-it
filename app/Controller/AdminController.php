@@ -40,10 +40,26 @@ class AdminController
         return new View('admin.admin_signup');
     }
     // Вывод всех пользователей для просмотра
-    public function all_users(): string
+    public function all_users(Request $request): string
     {
-        $users = User::all();
-        return new View('admin.all_users', ['users' => $users]);
+        $search = $request->get('search');
+
+        if ($search) {
+            // Поиск по нескольким полям
+            $users = User::where('name', 'like', "%$search%")
+                ->orWhere('surname', 'like', "%$search%")
+                ->orWhere('login', 'like', "%$search%")
+                ->orWhere('email', 'like', "%$search%")
+                ->orWhere('phone', 'like', "%$search%")
+                ->get();
+        } else {
+            $users = User::all();
+        }
+
+        return new View('admin.all_users', [
+            'users' => $users,
+            'search' => $search
+        ]);
     }
     public function debtorReport(): string
     {

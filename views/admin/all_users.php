@@ -39,6 +39,30 @@
 </head>
 <body>
 <div class="table-container">
+    <form method="GET" action="/admin/users/all" class="search-bar">
+        <input type="text" name="search"
+               placeholder="Поиск по имени, фамилии, логину, email или телефону..."
+               value="<?= htmlspecialchars($search ?? '') ?>">
+        <button type="submit">Найти</button>
+        <?php if (!empty($search)): ?>
+            <a href="/admin/users" class="reset">Сбросить</a>
+        <?php endif; ?>
+    </form>
+
+    <?php if (!empty($search)): ?>
+        <div class="search-results-info">
+            Найдено: <strong><?= count($users) ?></strong>
+            <?php if (count($users) === 1): ?>
+                пользователь
+            <?php elseif (count($users) < 5): ?>
+                пользователя
+            <?php else: ?>
+                пользователей
+            <?php endif; ?>
+            по запросу "<?= htmlspecialchars($search) ?>"
+        </div>
+    <?php endif; ?>
+
     <div class="table-header">
         <div>ID</div>
         <div>Фамилия</div>
@@ -64,8 +88,14 @@
             </div>
         <?php endforeach; ?>
     <?php else: ?>
-        <div class="table-row" style="grid-template-columns: 1fr; text-align: center;">
-            <div>Пользователи не найдены</div>
+        <div class="table-row" style="grid-template-columns: 1fr; text-align: center; padding: 30px;">
+            <div>
+                <?php if (!empty($search)): ?>
+                    Пользователи по запросу "<?= htmlspecialchars($search) ?>" не найдены
+                <?php else: ?>
+                    Пользователи не найдены
+                <?php endif; ?>
+            </div>
         </div>
     <?php endif; ?>
 </div>
