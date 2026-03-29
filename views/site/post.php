@@ -25,35 +25,9 @@
                     <div class="info-card">erteterte</div>
                 </div>
             </div>
-        </section>
-        <section class="catalog-rooms">
-            <div class="table-container">
-                <div class="table-header">
-                    <div>ID здания</div>
-                    <div>Название здания</div>
-                    <div>№</div>
-                    <div>Этаж</div>
-                    <div>Тип</div>
-                    <div>Мест</div>
-                    <div>Действия</div>
-                </div>
-
-                <?php if (!empty($rooms)): ?>
-                    <?php foreach ($rooms as $room): ?>
-                        <div class="table-row">
-                            <div><?= $room->buildingId ?></div>
-                            <div><?= $room->buildingName ?? 'ID: '.$room->buildingId ?></div>
-                            <div><?= $room->roomNumber ?></div>
-                            <div><?= $room->floor ?></div>
-                            <div><?= $room->roomType ?></div>
-                            <div><?= $room->numberOfTenants ?> / <?= $room->totalBeds ?></div>
-                        </div>
-                    <?php endforeach; ?>
-                <?php else: ?>
-                    <div class="table-row">
-                        <div>Комнаты не найдены</div>
-                    </div>
-                <?php endif; ?>
+            <div>
+                <h2>Каталог комнат</h2>
+                <a href="<?= app()->route->getUrl('/room/list')?>">Каталог всех комнат</a>
             </div>
         </section>
     </main>

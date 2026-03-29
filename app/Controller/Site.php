@@ -54,16 +54,15 @@ class Site
     {
         if ($request->method === 'POST') {
             $validator = new Validator($request->all(), [
-                'login' => ['required', 'unique:users,login', 'min:6', 'login'],
+                'login' => ['required', 'min:6', 'login'],
                 'password' => ['required', 'min:8', 'password'],
             ], [
                 'required' => 'Поле :field пусто',
-                'unique' => 'Поле :field должно быть уникально',
-                'min' => 'Поле :field должно содержать минимум :field символов',
+                'min' => 'Поле :field должно содержать минимум :min символов',
                 'password' => 'Поле :field должно быть на англйиском языке',
             ]);
             if ($validator->fails()) {
-                return new View('site.signup', ['message' => json_encode($validator->errors(), JSON_UNESCAPED_UNICODE)]);
+                return new View('site.login', ['message' => json_encode($validator->errors(), JSON_UNESCAPED_UNICODE)]);
             }
         }
         if ($request->method === 'GET') {

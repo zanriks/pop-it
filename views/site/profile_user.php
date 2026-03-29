@@ -12,6 +12,12 @@
 <main>
     <section class="profile-info">
         <h1>Профиль</h1>
+        <?php if (!empty($avatarUrl)): ?>
+            <div>
+                <img src="<?= app()->route->getUrl($avatarUrl) ?>" alt="avatar" width="120" height="120"
+                     style="object-fit: cover; border-radius: 25%">
+            </div>
+        <?php endif; ?>
         <p>Привет, <?= app()->auth::user()->name ?>!</p>
         <a href="<?= app()->route->getUrl('/tenant/booking/create') ?>">Забронировать комнату</a>
         <a href="<?= app()->route->getUrl('/profile/my_bookings') ?>">Мои бронирования</a>

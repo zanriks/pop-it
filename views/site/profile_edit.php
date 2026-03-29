@@ -20,6 +20,7 @@
             <label>Отчество (при наличии): <input type="text" name="patronymic" value="<?= $user->patronymic ?>"></label>
             <label>Номер телефона:<input type="tel" name="phone" value="<?= $user->phone ?>" required></label>
             <label>Почта:<input type="email" name="email" value="<?= $user->email ?>"></label>
+            <label>Аватар:<input type="file" name="avatar" accept=".jpg,.jpeg,.png,.webp,image/jpeg,image/png,image/webp"></label>
             <button type="submit">Сохранить изменения</button>
             <a href="/admin/admin_panel">Отмена</a>
         </form>

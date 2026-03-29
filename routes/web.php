@@ -4,8 +4,8 @@ use Framework\Route;
 Route::add('GET', '/', [Controller\Site::class, 'index']);
 Route::add(['GET', 'POST'], '/signup', [Controller\Site::class, 'signup']);
 Route::add(['GET', 'POST'], '/login', [Controller\Site::class, 'login']);
-Route::add('GET', '/room/list', [Controller\RoomController::class, 'list_rooms']);
 Route::add('GET', '/logout', [Controller\Site::class, 'logout'])->middleware('auth');
+Route::add('GET', '/room/list', [Controller\RoomController::class, 'list_rooms'])->middleware('auth');
 //Профиль пользователя
 Route::add('GET', '/profile/user', [Controller\UserController::class, 'profile'])->middleware('auth');
 Route::add(['GET', 'POST'], '/profile/edit', [Controller\UserController::class, 'profile_edit'])->middleware('auth');
@@ -25,7 +25,6 @@ Route::add('POST', '/admin/building/delete', [Controller\BuildingController::cla
 
 // Маршруты для работы с комнатами
 Route::add(['GET', 'POST'], '/admin/room/create', [Controller\RoomController::class, 'room_create'])->middleware('auth', 'admin');
-Route::add('GET', '/admin/room/list', [Controller\RoomController::class, 'list_rooms'])->middleware('auth', 'admin');
 Route::add('GET', '/admin/room/edit', [Controller\RoomController::class, 'room_edit'])->middleware('auth', 'admin');
 Route::add('POST', '/admin/room/update', [Controller\RoomController::class, 'room_update'])->middleware('auth', 'admin');
 Route::add('POST', '/admin/room/delete', [Controller\RoomController::class, 'delete_room'])->middleware('auth', 'admin');

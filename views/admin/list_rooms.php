@@ -34,10 +34,12 @@
                 <div><?= $room->roomType ?></div>
                 <div><?= $room->numberOfTenants ?> / <?= $room->totalBeds ?></div>
 
+                <?php if(app()->auth::user()->role === 'admin'): ?>
                 <div class="actions">
                     <a href="/admin/room/delete?room_id=<?= $room->buildingId ?>"
                        style="color: red;">Удалить</a>
                 </div>
+                <?php endif ?>
             </div>
         <?php endforeach; ?>
     <?php else: ?>
@@ -45,6 +47,7 @@
             <div>Комнаты не найдены</div>
         </div>
     <?php endif; ?>
+        <a href="/tenant/booking/create" style="color: red;">Забронировать комнату</a>
 </div>
 </body>
 </html>

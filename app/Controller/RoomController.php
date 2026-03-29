@@ -17,13 +17,14 @@ class RoomController
         if ($request->method === 'POST') {
             $validator = new Validator($request->all(), [
                 'buildingId' => ['required'],
-                'roomNumber' => ['required'],
+                'roomNumber' => ['required', 'numeric'],
                 'floor' => ['required'],
                 'roomType' => ['required'],
                 'totalBeds' => ['required'],
                 'numberOfTenants' => ['required']
             ], [
-                'required' => 'Поле :field пусто'
+                'required' => 'Поле :field пусто',
+                'numeric' => 'Поле :field должно содержать числовое значение'
             ]);
             if ($validator->fails()) {
                 return new View('admin.room_create', ['message' => json_encode($validator->errors(), JSON_UNESCAPED_UNICODE), 'buildings' => $buildings]);
