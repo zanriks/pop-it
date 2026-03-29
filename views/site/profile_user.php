@@ -12,12 +12,13 @@
 <main>
     <section class="profile-info">
         <h1>Профиль</h1>
-        <?php if (!empty($avatarUrl)): ?>
-            <div>
-                <img src="<?= app()->route->getUrl($avatarUrl) ?>" alt="avatar" width="120" height="120"
-                     style="object-fit: cover; border-radius: 25%">
-            </div>
-        <?php endif; ?>
+        <div class="user-avatar">
+            <?php if($user->avatar): ?>
+                <img src="/public/uploads/avatar/<?= $user->avatar ?>" alt="$user->name" style="width: 150px; height: 150px; object-fit: cover;">
+            <?php else: ?>
+                <img src="/public/uploads/avatars/default.png" alt="Default avatar" style="width: 150px; height: 150px; object-fit: cover;">
+            <?php endif ?>
+        </div>
         <p>Привет, <?= app()->auth::user()->name ?>!</p>
         <a href="<?= app()->route->getUrl('/tenant/booking/create') ?>">Забронировать комнату</a>
         <a href="<?= app()->route->getUrl('/profile/my_bookings') ?>">Мои бронирования</a>

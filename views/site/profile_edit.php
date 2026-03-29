@@ -13,7 +13,7 @@
     <div class="form">
         <h1>Редактирование профиля </h1>
 
-        <form action="/profile/update?id=<?= $user->id ?>" method="post">
+        <form action="/praktos/profile/update?id=<?= $user->id ?>" method="post" enctype="multipart/form-data">
             <input name="csrf_token" type="hidden" value="<?= app()->auth::generateCSRF() ?>"/>
             <label>Фамилия: <input type="text" name="surname" value="<?= $user->surname ?>" required></label>
             <label>Имя: <input type="text" name="name" value="<?= $user->name ?>" required></label>
