@@ -1,0 +1,36 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+}
+
+main {
+    width: 100%;
+    max-width: 1440px;
+    margin: 20px auto;
+}
+
+header { background-color: #171212;}
+
+nav {
+    max-width: 1440px;
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    padding: 15px 0;
+}
+
+a {
+    font-size: 18px;
+    text-decoration: none;
+    color: white;
+    font-weight: 600;
+    transition: color 0.2s;
+}
+
+a:hover {color: #3fecb3;}
+
+.user-notauth a{margin: 10px;}
+

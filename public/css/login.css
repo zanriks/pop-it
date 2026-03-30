@@ -1,0 +1,50 @@
+.login-form-center {
+    margin-top: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.login-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 30px;
+    border: 2px dashed black;
+    border-radius: 8px;
+    width: 100%;
+    max-width: 500px;
+}
+
+.login-form h2 {
+    margin-top: 0;
+    margin-bottom: 20px;
+}
+
+.login-form h3 {text-align: center; color: darkred}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    width: 100%;
+}
+
+label {width: 100%;}
+
+input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    outline: none;
+}
+
+button {
+    background-color: #171212;
+    color: white;
+    padding: 12px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
