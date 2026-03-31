@@ -6,6 +6,7 @@ return [
         'auth' => \Middlewares\AuthMiddleware::class,
         'admin' => \Middlewares\AdminMiddleware::class,
         'commandant' => \Middlewares\CommandantMiddleware::class,
+        'token' => \Middlewares\ApiAuthMiddleware::class,
     ],
     'validators' => [
         'required' => \Validators\RequireValidator::class,
@@ -18,9 +19,18 @@ return [
         'password' => \Validators\PasswordValidator::class,
         'login' => \Validators\LoginValidator::class
     ],
+    //Классы для middleware
     'routeAppMiddleware' => [
         'csrf' => \Middlewares\CSRFMiddleware::class,
-        'trim' => \Middlewares\TrimMiddleware::class,
         'specialChars' => \Middlewares\SpecialCharsMiddleware::class,
+        'trim' => \Middlewares\TrimMiddleware::class,
+        'json' => \Middlewares\JSONMiddleware::class,
+    ],
+
+    'providers' => [
+        'kernel' => \Providers\KernelProvider::class,
+        'route' => \Providers\RouteProvider::class,
+        'db' => \Providers\DBProvider::class,
+        'auth' => \Providers\AuthProvider::class,
     ],
 ];

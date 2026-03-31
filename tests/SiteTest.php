@@ -2,7 +2,6 @@
 
 use Model\User;
 use PHPUnit\Framework\TestCase;
-
 class SiteTest extends TestCase
 {
     /**

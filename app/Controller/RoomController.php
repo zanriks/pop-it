@@ -79,4 +79,30 @@ class RoomController
         }
         return (new View())->render('admin.room_edit', ['room' => $room]);
     }
+    public function searchAvailable($request)
+    {
+        // GET запрос - показываем форму
+        if ($request->method === 'GET') {
+            return View::render('rooms/search_form.php');
+        }
+
+        // POST запрос - обрабатываем поиск
+        $gender = $request->all()['gender'] ?? '';
+        $startDate = !empty($request->all()['start_date']) ? $request->all()['start_date'] : null;
+        $endDate = !empty($request->all()['end_date']) ? $request->all()['end_date'] : null;
+
+        // Валидация
+        if (!in_array($gender, ['male', 'female'])) {
+            echo "Выберите корректный пол";
+            return '';
+        }
+
+        $rooms = Room::findAvailableByGender($gender, $startDate, $endDate);
+
+        if ($rooms->isEmpty()) {
+            echo "Комнат не найдено";
+        } else {
+            echo "Комнат найдено: " . $rooms->count();
+        }
+    }
 }

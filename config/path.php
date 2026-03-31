@@ -1,6 +1,6 @@
 <?php
 return [
-    'root' => '',
+    'root' => 'fxaikis-m3',
     'routes' => 'routes',
     'views' => 'views'
 ];
