@@ -3,28 +3,57 @@
 namespace Middlewares;
 
 use Framework\Request;
+use Model\ApiToken;
 
 class ApiAuthMiddleware
 {
-    public function handle(Request $request): Request
+    private ApiToken $apiToken;
+
+    public function __construct()
     {
-        session_start();
+        $this->apiToken = new ApiToken();
+    }
 
-        // Получаем токен из заголовка
-        $headers = getallheaders();
-        $token = $headers['Authorization'] ?? $headers['authorization'] ?? null;
+    public function handle(Request $request)
+    {
+        // Получаем заголовок Authorization
+        $authHeader = $request->headers['Authorization'] ?? $request->headers['authorization'] ?? null;
 
-        // Убираем 'Bearer ' если есть
-        if ($token && strpos($token, 'Bearer ') === 0) {
-            $token = substr($token, 7);
-        }
-
-        // Проверяем токен
-        if (!$token || !isset($_SESSION['api_token']) || $_SESSION['api_token'] !== $token) {
+        if (!$authHeader) {
             http_response_code(401);
-            echo json_encode(['error' => 'Неавторизованный доступ']);
+            echo json_encode(['error' => 'Токен авторизации не предоставлен']);
             exit;
         }
+
+        // Проверяем формат Bearer token
+        if (!preg_match('/^Bearer\s+(.+)$/i', $authHeader, $matches)) {
+            http_response_code(401);
+            echo json_encode(['error' => 'Неверный формат токена. Используйте Bearer token']);
+            exit;
+        }
+
+        $token = $matches[1];
+
+        // Проверяем токен в БД
+        $tokenData = $this->apiToken->where('token', $token)->first();
+
+        if (!$tokenData) {
+            http_response_code(401);
+            echo json_encode(['error' => 'Недействительный токен авторизации']);
+            exit;
+        }
+
+        // Получаем пользователя
+        $user = $tokenData->user;
+
+        if (!$user) {
+            http_response_code(401);
+            echo json_encode(['error' => 'Пользователь не найден']);
+            exit;
+        }
+
+        // Добавляем пользователя в request
+        $request->user = $user;
 
         return $request;
     }

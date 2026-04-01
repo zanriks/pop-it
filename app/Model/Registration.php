@@ -30,4 +30,15 @@ class Registration extends Model
     {
         return $this->belongsTo(Room::class, 'roomId', 'roomId');
     }
+    public static function getActiveRegistrations($date = null)
+    {
+        if (!$date) {
+            $date = date('Y-m-d');
+        }
+
+        return self::where('status', 'active')
+            ->where('checkInDate', '<=', $date)
+            ->where('checkOutDate', '>=', $date)
+            ->get();
+    }
 }
